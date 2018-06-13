@@ -12,7 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{487E3D38-1B99-4E31-BD76-CF078038CA56}</ProjectGuid>
-    <RootNamespace>Engine</RootNamespace>
+    <RootNamespace>Animal</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -68,6 +68,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Inc\Macros.h" />
+    <ClInclude Include="Inc\Process.h" />
+    <ClInclude Include="Inc\ProcessManager.h" />
+    <ClInclude Include="Inc\Types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

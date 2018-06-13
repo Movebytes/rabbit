@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Inc\Macros.h" />
+    <ClInclude Include="Inc\Process.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\ProcessManager.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="System">
+      <UniqueIdentifier>{666062b0-ac93-4f4b-82a4-f2894364e481}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
