@@ -9,10 +9,16 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="Inc\Types.h" />
+    <ClInclude Include="Inc\Vector3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
       <UniqueIdentifier>{666062b0-ac93-4f4b-82a4-f2894364e481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{35ca6084-660b-406d-9672-510d3e60d55a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -5,6 +5,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rabbit", "Rabbit.vcxproj", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Animal", "..\Animal\Source\Animal.vcxproj", "{487E3D38-1B99-4E31-BD76-CF078038CA56}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimalTests", "..\Animal\Tests\AnimalTests.vcxproj", "{D36D3100-E3CE-4584-84F0-42E51332D1D6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RabbitTests", "..\Tests\RabbitTests.vcxproj", "{EE959301-6E7D-455D-A36C-27D9F64088F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +23,14 @@ Global
 		{487E3D38-1B99-4E31-BD76-CF078038CA56}.Debug|Win32.Build.0 = Debug|Win32
 		{487E3D38-1B99-4E31-BD76-CF078038CA56}.Release|Win32.ActiveCfg = Release|Win32
 		{487E3D38-1B99-4E31-BD76-CF078038CA56}.Release|Win32.Build.0 = Release|Win32
+		{D36D3100-E3CE-4584-84F0-42E51332D1D6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D36D3100-E3CE-4584-84F0-42E51332D1D6}.Debug|Win32.Build.0 = Debug|Win32
+		{D36D3100-E3CE-4584-84F0-42E51332D1D6}.Release|Win32.ActiveCfg = Release|Win32
+		{D36D3100-E3CE-4584-84F0-42E51332D1D6}.Release|Win32.Build.0 = Release|Win32
+		{EE959301-6E7D-455D-A36C-27D9F64088F4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EE959301-6E7D-455D-A36C-27D9F64088F4}.Debug|Win32.Build.0 = Debug|Win32
+		{EE959301-6E7D-455D-A36C-27D9F64088F4}.Release|Win32.ActiveCfg = Release|Win32
+		{EE959301-6E7D-455D-A36C-27D9F64088F4}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
