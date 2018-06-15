@@ -19,10 +19,13 @@
 #include "Types.h"
 #include "ProcessManager.h"
 namespace aml {
+// Forward declaration
 class Process;
 class ProcessManager;
+// Typedefs
 typedef std::shared_ptr<Process> StrongProcessPtr;
 typedef std::weak_ptr<Process> WeakProcessPtr;
+// Process class
 class Process
 {
 	friend class ProcessManager;

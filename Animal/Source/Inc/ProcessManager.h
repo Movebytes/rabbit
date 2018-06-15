@@ -15,4 +15,7 @@
  */
 #ifndef _AML_PROCESS_MANAGER_H_
 #define _AML_PROCESS_MANAGER_H_
+#include "Macros.h"
+namespace aml {
+} // aml
 #endif // _AML_PROCESS_MANAGER_H_
