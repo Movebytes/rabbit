@@ -12,6 +12,12 @@
     <ClInclude Include="Inc\Vector3.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\Vector2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Vector4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -20,5 +26,16 @@
     <Filter Include="Math">
       <UniqueIdentifier>{35ca6084-660b-406d-9672-510d3e60d55a}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

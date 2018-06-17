@@ -13,47 +13,40 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_VECTOR3_H_
-#define _AML_VECTOR3_H_
+#ifndef _AML_VECTOR2_H_
+#define _AML_VECTOR2_H_
 #include <d3dx9math.h>
-#include "Vector4.h"
 #include "Types.h"
+#include "Vector3.h"
 namespace aml {
 // Forward declarations
-class Vector4;
-class Quaternion;
+class Vector3;
 // Wrapper for vector
-class Vector3 : public D3DXVECTOR3
+class Vector2 : public D3DXVECTOR2
 {
 public:
 	// Default constructor
-	Vector3();
-	Vector3(D3DXVECTOR3& Vector);
-	Vector3(const F32 fX, const F32 fY, const F32 fZ);
-	Vector3(const Vector4& Vector);
+	Vector2();
+	Vector2(D3DXVECTOR2& Vector);
+	Vector2(const F32 fX, const F32 fY);
+	Vector2(const Vector3& Vector);
 	// Calculate length
 	F32 GetLength() const;
 	// Calculate length square
 	F32 GetLengthSquare() const;
 	// Normalize vector
-	Vector3* Normalize();
+	Vector2* Normalize();
 	// Calculate dot product
-	F32 GetDotProduct(const Vector3& Vector) const;
+	F32 GetDotProduct(const Vector2& Vector) const;
 	// Calculate distance
-    F32 GetDistace(const Vector3& Vector) const;
-	// Rotate vector by quaternion
-    void Rotate(const Quaternion& Quat);
+    F32 GetDistace(const Vector2& Vector) const;
 	// Linear interpolation
-	Vector3 LERP(const Vector3& Vector, F32 fDt) const;
-	// Mull by vector and return result
-    Vector3 operator*(const Vector3& Vector) const;
-	// Mull by vector and assign result
-    Vector3& operator*=(const Vector3& Vector);
+	Vector2 LERP(const Vector2& Vector, F32 fDt) const;
 	// Compare vectors
-	bool operator<=(const Vector3 & Vector) const;
-    bool operator>=(const Vector3 & Vector) const;
-    bool operator<(const Vector3 & Vector) const;
-    bool operator>(const Vector3 & Vector) const;
-}; // Vector3
+	bool operator<=(const Vector2 & Vector) const;
+    bool operator>=(const Vector2 & Vector) const;
+    bool operator<(const Vector2 & Vector) const;
+    bool operator>(const Vector2 & Vector) const;
+}; // Vector2
 } // aml
-#endif // _AML_VECTOR3_H_
+#endif // _AML_VECTOR2_H_
