@@ -71,6 +71,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Inc\Macros.h" />
+    <ClInclude Include="Inc\Matrix4.h" />
     <ClInclude Include="Inc\Process.h" />
     <ClInclude Include="Inc\ProcessManager.h" />
     <ClInclude Include="Inc\Types.h" />
@@ -79,6 +80,7 @@
     <ClInclude Include="Inc\Vector4.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Vector4.cpp" />
