@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rabbit", "Rabbit.vcxproj", "{033D2829-A74D-4DAE-A531-788F4AB25DFE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Animal", "..\Animal\Source\Animal.vcxproj", "{487E3D38-1B99-4E31-BD76-CF078038CA56}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Animal", "..\..\Animal\Source\Msvc\Animal.vcxproj", "{487E3D38-1B99-4E31-BD76-CF078038CA56}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimalTests", "..\Animal\Tests\AnimalTests.vcxproj", "{D36D3100-E3CE-4584-84F0-42E51332D1D6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimalTests", "..\..\Animal\Tests\Msvc\AnimalTests.vcxproj", "{D36D3100-E3CE-4584-84F0-42E51332D1D6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RabbitTests", "..\Tests\RabbitTests.vcxproj", "{EE959301-6E7D-455D-A36C-27D9F64088F4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RabbitTests", "..\..\Tests\Msvc\RabbitTests.vcxproj", "{EE959301-6E7D-455D-A36C-27D9F64088F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

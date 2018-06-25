@@ -13,4 +13,16 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#include "Inc\Matrix4.h"
+#ifndef _AML_MATH_CONSTANST_H_
+#define _AML_MATH_CONSTANST_H_
+#include "Types.h"
+// PI
+#define PI		 ((F32)3.141592654f)
+#define PI2		 ((F32)6.283185307f)
+#define PI_DIV_2 ((F32)1.570796327f)
+#define PI_DIV_4 ((F32)0.785398163f)
+// Epsilon
+#define EPSILON_E4 ((F32)1E-4) // 0,0001
+#define EPSILON_E5 ((F32)1E-5) // 0,00001
+#define EPSILON_E6 ((F32)1E-6) // 0,000001
+#endif // _AML_MATH_CONSTANST_H_
