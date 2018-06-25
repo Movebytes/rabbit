@@ -95,54 +95,7 @@ void aml::Camera::CalculateViewMatrix(const Vector3& vecTarget)
 }
 void aml::Camera::CalculateFrustumPlanes()
 {
-	Vector3 vecNear = m_vPosition + (D3DXVECTOR3)m_vLook * m_fNearZ;
-    Vector3 vecFar = m_vPosition + (D3DXVECTOR3)m_vLook * m_fFarZ;
-    F32 fNearHeight = 2.0f * tanf(m_fFov / 2.0f) * m_fNearZ;
-    F32 fNearWidth = fNearHeight * m_fAr;
-    F32 fFarHeight = 2.0f * tanf(m_fFov / 2.0f) * m_fFarZ;
-    F32 fFarWidth = fFarHeight * m_fAr;
-    F32 fhNearHeight = fNearHeight / 2.0f;
-    F32 fhNearWidth = fNearWidth / 2.0f;
-    F32 fhFarHeight = fFarHeight / 2.0f;
-    F32 fhFarWidth = fFarWidth / 2.0f;
-    m_viewFrustum.m_arrFarPoints[0] = vecFar + (D3DXVECTOR3)m_vUp * fhFarHeight - (D3DXVECTOR3)m_vRight * fhFarWidth;
-    m_viewFrustum.m_arrFarPoints[1] = vecFar - (D3DXVECTOR3)m_vUp * fhFarHeight - (D3DXVECTOR3)m_vRight * fhFarWidth;
-    m_viewFrustum.m_arrFarPoints[2] = vecFar - (D3DXVECTOR3)m_vUp * fhFarHeight + (D3DXVECTOR3)m_vRight * fhFarWidth;
-    m_viewFrustum.m_arrFarPoints[3] = vecFar + (D3DXVECTOR3)m_vUp * fhFarHeight + (D3DXVECTOR3)m_vRight * fhFarWidth;
-    m_viewFrustum.m_arrNearPoints[0] = vecNear + (D3DXVECTOR3)m_vUp * fhNearHeight - (D3DXVECTOR3)m_vRight * fhNearWidth;
-    m_viewFrustum.m_arrNearPoints[1] = vecNear - (D3DXVECTOR3)m_vUp * fhNearHeight - (D3DXVECTOR3)m_vRight * fhNearWidth;
-    m_viewFrustum.m_arrNearPoints[2] = vecNear - (D3DXVECTOR3)m_vUp * fhNearHeight + (D3DXVECTOR3)m_vRight * fhNearWidth;
-    m_viewFrustum.m_arrNearPoints[3] = vecNear + (D3DXVECTOR3)m_vUp * fhNearHeight + (D3DXVECTOR3)m_vRight * fhNearWidth;
-    m_viewFrustum.m_arrPlanes[0] = Plane(
-            m_viewFrustum.m_arrNearPoints[3],
-            m_viewFrustum.m_arrNearPoints[0],
-            m_viewFrustum.m_arrFarPoints[0]
-    );
-    m_viewFrustum.m_arrPlanes[1] = Plane(
-            m_viewFrustum.m_arrNearPoints[1],
-            m_viewFrustum.m_arrNearPoints[2],
-            m_viewFrustum.m_arrFarPoints[2]
-    );
-    m_viewFrustum.m_arrPlanes[2] = Plane(
-            m_viewFrustum.m_arrNearPoints[0],
-            m_viewFrustum.m_arrNearPoints[1],
-            m_viewFrustum.m_arrFarPoints[1]
-    );
-    m_viewFrustum.m_arrPlanes[3] = Plane(
-            m_viewFrustum.m_arrNearPoints[2],
-            m_viewFrustum.m_arrNearPoints[3],
-            m_viewFrustum.m_arrFarPoints[2]
-    );
-    m_viewFrustum.m_arrPlanes[4] = Plane(
-            m_viewFrustum.m_arrNearPoints[0],
-            m_viewFrustum.m_arrNearPoints[3],
-            m_viewFrustum.m_arrNearPoints[2]
-    );
-    m_viewFrustum.m_arrPlanes[5] = Plane(
-            m_viewFrustum.m_arrFarPoints[3],
-            m_viewFrustum.m_arrFarPoints[0],
-            m_viewFrustum.m_arrFarPoints[1]
-    );
+	// todo
 }
 void aml::Camera::SetFOV(const F32 fFov)
 {

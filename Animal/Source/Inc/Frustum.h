@@ -26,18 +26,31 @@ class Vector3;
 class Frustum
 {
 public:
+	enum FrustumSide 
+	{
+		Near = 0,
+		Far,
+		Top, 
+		Right,
+		Bottom,
+		Left,
+		NumPlanes
+	};
+public:
     // Frustum planes
-    Plane m_arrPlanes[6];
+    Plane m_arrPlanes[NumPlanes];
     // Frustum points
     Vector3 m_arrFarPoints[4];
     Vector3 m_arrNearPoints[4];
 public:
+	// Get plane of frustum
+	const Plane& GetPlane(FrustumSide Side) const;
 	// Check is Point inside Frustum
-    bool IsPointInside(const Vector3& vPoint);
+    bool Contains(const Vector3& vPoint);
 	// Check is Shpere inside Frustum
-    bool IsSphereInside(const Vector3& vCenter, const F32 fRadius);
+    bool Contains(const Vector3& vCenter, const F32 fRadius);
 	// Check is Box inside
-    bool IsBoxInside(const Vector3& vMin, const Vector3& vMax);
+    bool Contains(const Vector3& vMin, const Vector3& vMax);
 }; // Frustum
 } // aml
 #endif // _AML_FRUSTUM_H_

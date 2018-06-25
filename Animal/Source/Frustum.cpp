@@ -15,9 +15,9 @@
  */
 #include "Inc\Frustum.h"
 // Check is Point inside Frustum
-bool aml::Frustum::IsPointInside(const Vector3& vPoint)
+bool aml::Frustum::Contains(const Vector3& vPoint)
 {
-    for (U32 i = 0; i < 6; i++)
+    for (U32 i = 0; i < NumPlanes; i++)
     {
         if (m_arrPlanes[i].GetDistance(vPoint) < 0.0f)
         {
@@ -27,9 +27,9 @@ bool aml::Frustum::IsPointInside(const Vector3& vPoint)
     return true;
 }
 // Check is Shpere inside Frustum
-bool aml::Frustum::IsSphereInside(const Vector3& vCenter, const F32 fRadius)
+bool aml::Frustum::Contains(const Vector3& vCenter, const F32 fRadius)
 {
-    for (U32 i = 0; i < 6; i++)
+    for (U32 i = 0; i < NumPlanes; i++)
     {
         F32 fDistance = m_arrPlanes[i].GetDistance(vCenter);
         if (fDistance < -fRadius)
@@ -40,9 +40,9 @@ bool aml::Frustum::IsSphereInside(const Vector3& vCenter, const F32 fRadius)
     return true;
 }
 // Check is Box inside
-bool aml::Frustum::IsBoxInside(const Vector3& vMin, const Vector3& vMax)
+bool aml::Frustum::Contains(const Vector3& vMin, const Vector3& vMax)
 {
-    for (U32 i = 0; i < 6; i++)
+    for (U32 i = 0; i < NumPlanes; i++)
     {
         Vector3 vP = vMin;
         Vector3 vN = vMax;
