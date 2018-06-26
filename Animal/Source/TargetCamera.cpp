@@ -35,7 +35,7 @@ void aml::TargetCamera::Update()
     // Update view matrix
     CalculateViewMatrix(m_vTarget);
     // Update frustum
-    CalculateFrustumPlanes();
+    m_viewFrustum.CalculatePlanes(m_vRight, m_vUp, m_vLook);
 }
 void aml::TargetCamera::SetTarget(const Vector3& vTarget)
 {

@@ -39,14 +39,6 @@ protected:
     F32 m_fYaw;
     F32 m_fPitch;
     F32 m_fRoll;
-    // Near z of cut of view space
-    F32 m_fNearZ;
-    // Far z of cut of view space
-    F32 m_fFarZ;
-    // Field of view angle
-    F32 m_fFov;
-    // Viewport width / Viewport height
-    F32 m_fAr;
     // Matrices
     Matrix4 m_mView;
 	Matrix4 m_mProjection;
@@ -55,27 +47,78 @@ protected:
 public:
     // Default constructor
 	Camera();
+	// Calculate projection matrix
     void SetupProjection(const F32 fFov, const F32 fAspectRation, const F32 fNearZ, const F32 fFarZ);
+	// Update camera state
     virtual void Update() = 0;
+	// Rotate camera
     virtual void Rotate(const F32 fYaw, const F32 fPitch, const F32 fRoll);
+	// Accessors for matrices
     const Matrix4 GetViewMatrix() const;
 	const Matrix4 GetProjectionMatrix() const;
+	// Accessors of camera position
     void SetPosition(const Vector3 & vecPosition);
     const Vector3 GetPosition() const;
+	// Accessors of field of view
     void SetFOV(const F32 fFov);
     const F32 GetFOV() const;
+	// Accessors of aspect ratio
     void SetAspectRation(const F32 fAr);
     const F32 GetAspectRation() const;
-    Frustum GetViewFrustum() const;
+	// Return view frustum
+    const Frustum& GetViewFrustum() const;
 protected:
     void CalculateViewMatrix(const Vector3 & vecTarget);
     void CalculateProjectionMatrix();
-    void CalculateFrustumPlanes();
 }; // Camera
 // Calculate projection matrix
 inline void Camera::CalculateProjectionMatrix()
 {
-	D3DXMatrixPerspectiveFovRH(&m_mProjection, m_fFov, m_fAr, m_fNearZ, m_fFarZ);
+	D3DXMatrixPerspectiveFovRH(&m_mProjection, m_viewFrustum.GetFOV(), m_viewFrustum.GetAspectRation(), m_viewFrustum.GetNearZ(), m_viewFrustum.GetFarZ());
+}
+// Set camera position
+inline void Camera::SetPosition(const Vector3& vPosition)
+{
+    m_vPosition = vPosition;
+}
+// Get camera position
+inline const Vector3 Camera::GetPosition() const
+{
+    return m_vPosition;
+}
+// Get view matrix
+inline const Matrix4 Camera::GetViewMatrix() const
+{
+    return m_mView;
+}
+// Get projection matrix for left handed system
+inline const Matrix4 Camera::GetProjectionMatrix() const
+{
+    return m_mProjection;
+}
+inline void Camera::SetFOV(const F32 fFov)
+{
+    m_viewFrustum.SetFOV(fFov);
+    // Update projection matrix
+    CalculateProjectionMatrix();
+}
+inline const F32 Camera::GetFOV() const
+{
+    return m_viewFrustum.GetFOV();
+}
+inline void Camera::SetAspectRation(const F32 fAr)
+{
+    m_viewFrustum.SetAspectRation(fAr);
+    // Update projection matrix
+    CalculateProjectionMatrix();
+}
+inline const F32 Camera::GetAspectRation() const
+{
+	return m_viewFrustum.GetAspectRation();
+}
+inline const Frustum& Camera::GetViewFrustum() const
+{
+    return m_viewFrustum;
 }
 } // aml
 #endif // _AML_CAMERA_H_

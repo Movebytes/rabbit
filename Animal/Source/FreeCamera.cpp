@@ -35,7 +35,7 @@ void aml::FreeCamera::Update()
     // Update view matrix
     CalculateViewMatrix(vTarget);
     // Update frustum
-    CalculateFrustumPlanes();
+	m_viewFrustum.CalculatePlanes(m_vRight, m_vUp, m_vLook);
     m_vTranslation.SetCoords(0.0f, 0.0f, 0.0f);
 }
 void aml::FreeCamera::Walk(const F32 fDt)

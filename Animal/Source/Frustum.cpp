@@ -13,9 +13,10 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+#include <cmath>
 #include "Inc\Frustum.h"
 // Check is Point inside Frustum
-bool aml::Frustum::Contains(const Vector3& vPoint)
+bool aml::Frustum::Contains(const Vector3& vPoint) const
 {
     for (U32 i = 0; i < NumPlanes; i++)
     {
@@ -27,7 +28,7 @@ bool aml::Frustum::Contains(const Vector3& vPoint)
     return true;
 }
 // Check is Shpere inside Frustum
-bool aml::Frustum::Contains(const Vector3& vCenter, const F32 fRadius)
+bool aml::Frustum::Contains(const Vector3& vCenter, const F32 fRadius) const
 {
     for (U32 i = 0; i < NumPlanes; i++)
     {
@@ -40,7 +41,7 @@ bool aml::Frustum::Contains(const Vector3& vCenter, const F32 fRadius)
     return true;
 }
 // Check is Box inside
-bool aml::Frustum::Contains(const Vector3& vMin, const Vector3& vMax)
+bool aml::Frustum::Contains(const Vector3& vMin, const Vector3& vMax) const
 {
     for (U32 i = 0; i < NumPlanes; i++)
     {
@@ -69,3 +70,34 @@ bool aml::Frustum::Contains(const Vector3& vMin, const Vector3& vMax)
     }
     return true;
 }
+// Calculate all planes
+void aml::Frustum::CalculatePlanes(const Vector3& vRight, const Vector3& vUp, const Vector3& vLook)
+{
+	// Calculate plane vectors
+	F64 fTanFovDiv2 = tan(m_fFov / 2.0f);
+	Vector3 vNearRight = (m_fNearZ * fTanFovDiv2) * m_fAr * vRight;
+	Vector3 vFarRight = (m_fFarZ * fTanFovDiv2) * m_fAr * vRight;
+	Vector3 vNearUp = (m_fNearZ * fTanFovDiv2) * vUp;
+	Vector3 vFarUp = (m_fFarZ * fTanFovDiv2) * vUp;
+	// Calculate near plane points
+	const Vector3 vNear = m_fNearZ * vLook;
+	m_arrNearPoints[0] = vNear - vNearRight + vNearUp;
+	m_arrNearPoints[1] = vNear + vNearRight + vNearUp;
+	m_arrNearPoints[2] = vNear + vNearRight - vNearUp;
+	m_arrNearPoints[3] = vNear - vNearRight - vNearUp;
+	// Calculate far plane points
+	const Vector3 vFar = m_fFarZ * vLook;
+	m_arrFarPoints[0] = vFar - vFarRight + vFarUp;
+	m_arrFarPoints[1] = vFar + vFarRight + vFarUp;
+	m_arrFarPoints[2] = vFar + vFarRight - vFarUp;
+	m_arrFarPoints[3] = vFar - vFarRight - vFarUp;
+	// Construct all planes
+	const Vector3 vOrigin(0.0f, 0.0f, 0.0f);
+	m_arrPlanes[Near] = Plane(m_arrNearPoints[2], m_arrNearPoints[1], m_arrNearPoints[0]);
+	m_arrPlanes[Far] = Plane(m_arrFarPoints[0], m_arrFarPoints[1], m_arrFarPoints[2]);
+	m_arrPlanes[Right] = Plane(m_arrFarPoints[2], m_arrFarPoints[1], vOrigin);
+	m_arrPlanes[Top] = Plane(m_arrFarPoints[1], m_arrFarPoints[0], vOrigin);
+	m_arrPlanes[Left] = Plane(m_arrFarPoints[0], m_arrFarPoints[3], vOrigin);
+	m_arrPlanes[Bottom] = Plane(m_arrFarPoints[3], m_arrFarPoints[2], vOrigin);
+}
+	

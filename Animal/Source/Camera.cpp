@@ -23,41 +23,18 @@ aml::Camera::Camera()
     m_vRight.SetCoords(1.0f, 0.0f, 0.0f);
     m_vUp.SetCoords(0.0f, 1.0f, 0.0f);
     m_vLook.SetCoords(0.0f, 0.0f, -1.0f);
-    m_fFov = PI_DIV_2;
-    m_fNearZ = 0.1f;
-    m_fFarZ = 1000.0f;
     m_fYaw = 0.0f;
     m_fPitch = 0.0f;
     m_fRoll = 0.0f;
 	m_mView = Matrix4::Identity;
 	m_mProjection = Matrix4::Identity;
 }
-// Set camera position
-void aml::Camera::SetPosition(const Vector3& vPosition)
-{
-    m_vPosition = vPosition;
-}
-// Get camera position
-const aml::Vector3 aml::Camera::GetPosition() const
-{
-    return m_vPosition;
-}
-// Get view matrix
-const aml::Matrix4 aml::Camera::GetViewMatrix() const
-{
-    return m_mView;
-}
-// Get projection matrix for left handed system
-const aml::Matrix4 aml::Camera::GetProjectionMatrix() const
-{
-    return m_mProjection;
-}
 void aml::Camera::SetupProjection(const F32 fFov, const F32 fAspectRation, const F32 fNearZ=1.0f, const F32 fFarZ=1000.0f)
 {
-    m_fFov = fFov;
-    m_fAr = fAspectRation;
-    m_fNearZ = fNearZ;
-    m_fFarZ = fFarZ;
+	m_viewFrustum.SetFOV(fFov);
+    m_viewFrustum.SetAspectRation(fAspectRation);
+    m_viewFrustum.SetNearZ(fNearZ);
+    m_viewFrustum.SetFarZ(fFarZ);
     // Update projection matrix
     CalculateProjectionMatrix();
 }
@@ -92,32 +69,4 @@ void aml::Camera::CalculateViewMatrix(const Vector3& vecTarget)
     m_mView._23 = -vecF.y;
     m_mView._33 = -vecF.z;
     m_mView._43 = vecF.GetDotProduct(vecTarget);
-}
-void aml::Camera::CalculateFrustumPlanes()
-{
-	// todo
-}
-void aml::Camera::SetFOV(const F32 fFov)
-{
-    m_fFov = fFov;
-    // Update projection matrix
-    CalculateProjectionMatrix();
-}
-const F32 aml::Camera::GetFOV() const
-{
-    return m_fFov;
-}
-void aml::Camera::SetAspectRation(const F32 fAr)
-{
-    m_fAr = fAr;
-    // Update projection matrix
-    CalculateProjectionMatrix();
-}
-const F32 aml::Camera::GetAspectRation() const
-{
-    return m_fAr;
-}
-aml::Frustum aml::Camera::GetViewFrustum() const
-{
-    return m_viewFrustum;
 }
