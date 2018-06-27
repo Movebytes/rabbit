@@ -20,23 +20,22 @@
 #include "Logger.h"
 #include "Types.h"
 namespace aml {
-// Todo: Add more detailed exception class for different states
 // Custom exception class helper
-class Exception: public std::exception
+class Exception
 {
 private:
-    const char * m_szFileName;
+    const wchar_t* m_wszFileName;
     S32 m_iLineNum;
-    std::string m_strMessage;
-    std::string m_strReport;
+    std::wstring m_strMessage;
+    std::wstring m_strReport;
 public:
     // Formating helper class
     class StreamFormatter
     {
     private:
-        std::ostringstream m_ossStream;
+        std::wostringstream m_ossStream;
     public:
-        operator std::string() const
+        operator std::wstring() const
         {
             return m_ossStream.str();
         }
@@ -48,45 +47,45 @@ public:
         }
     }; // StreamFormatter
     // Default constructor
-    Exception(const char * szFileName, S32 iLineNum, const std::string strMessage);
+    Exception(const wchar_t* wszFileName, S32 iLineNum, const std::wstring strMessage);
     // Default destructor
     ~Exception() throw();
     // Return exception report message
-    virtual const char* what() const throw();
+    virtual const wchar_t* what() const throw();
     // Return file name where exception was throwed
-    const char* GetFileName() const throw();
+    const wchar_t* GetFileName() const throw();
     // Return line number where exception was throwed
     S32 GetLineNum() const throw();
     // Retur exception error message
-    const char* GetMessage() const throw();
+    const wchar_t* GetMessage() const throw();
 }; // Exception
 // Default constructor
-inline Exception::Exception(const char * szFileName, S32 iLineNum, const std::string strMessage)
-    : m_szFileName(szFileName)
+inline Exception::Exception(const wchar_t* szFileName, S32 iLineNum, const std::wstring strMessage)
+    : m_wszFileName(szFileName)
     , m_iLineNum(iLineNum)
     , m_strMessage(strMessage)
 {
-    std::stringstream ssOutput;
+    std::wstringstream ssOutput;
     if (!strMessage.empty())
     {
-        ssOutput << strMessage << "  ";
+        ssOutput << strMessage << L"  ";
     }
-    ssOutput << "Exception throwed from file \"" << szFileName << "\" on line " << iLineNum;
+    ssOutput << L"Exception throwed from file \"" << szFileName << L"\" on line " << iLineNum;
     m_strReport = ssOutput.str();
-    M3E_LOG(LOG_LEVEL_ERROR) << m_strReport ;
+    AML_LOG(LOG_LEVEL_ERROR) << m_strReport;
 }
 // Default destructor
 inline Exception::~Exception() throw()
 {}
 // Return exception report message
-inline const char* Exception::what() const throw()
+inline const wchar_t* Exception::what() const throw()
 {
     return m_strReport.c_str();
 }
 // Return file name where exception was throwed
-inline const char* Exception::GetFileName() const throw()
+inline const wchar_t* Exception::GetFileName() const throw()
 {
-    return m_szFileName;
+    return m_wszFileName;
 }
 // Return line number where exception was throwed
 inline S32 Exception::GetLineNum() const throw()
@@ -94,12 +93,12 @@ inline S32 Exception::GetLineNum() const throw()
     return m_iLineNum;
 }
 // Retur exception error message
-inline const char* Exception::GetMessage() const throw()
+inline const wchar_t* Exception::GetMessage() const throw()
 {
     return m_strMessage.c_str();
 }
 } // aml
-#define AML_EXCEPTION(MESSAGE) throw m3e::Exception(__FILE__, __LINE__, (aml::Exception::StreamFormatter() << MESSAGE));
+#define AML_EXCEPTION(MESSAGE) throw aml::Exception(__FILE__, __LINE__, (aml::Exception::StreamFormatter() << MESSAGE));
 #define AML_ASSERT(condition) \
 if (!condition) \
 { \

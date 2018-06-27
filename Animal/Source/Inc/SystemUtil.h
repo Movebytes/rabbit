@@ -26,43 +26,36 @@ inline std::wstring GetAppPath()
 	if (strAppPath.empty())
     {
 		// Get full path to app
-        wchar_t buffer[_MAX_PATH];
-		memset(buffer, 0, sizeof(buffer));
-		GetModuleFileName(NULL, buffer, _MAX_PATH);
+		strAppPath.resize(MAX_PATH, 0);
+		GetModuleFileName(NULL, &strAppPath.front(), MAX_PATH);
 		// Get path without app name
-		S32 i = wcslen(buffer) - 1;
-		for (i; i > 0; i--)
+		S32 iSlashPos = strAppPath.rfind(L"\\");
+		if (iSlashPos != std::wstring::npos)
 		{
-			if (buffer[i] == '\\')
-			{
-				break;
-			}
+			strAppPath.resize(iSlashPos - 1);
 		}
-		// Mark end of string
-		buffer[i + 1] = '\0';
-		strAppPath.assign(buffer);
     } 
 	return strAppPath;
 } // GetAppPath()
 // Get file extension
 inline std::wstring GetFileExt(const std::wstring& strFileName)
 {
-	S32 iDot = strFileName.rfind(L".");
+	S32 iDotPos = strFileName.rfind(L".");
     std::wstring strExt;
-    if (iDot != std::wstring::npos)
+    if (iDotPos != std::wstring::npos)
     {
-        strExt = strFileName.substr(iDot + 1);
+        strExt = strFileName.substr(iDotPos + 1);
     }
 	return strExt;
 } // GetFileExt
 // Get file name
 inline std::wstring GetFileName(const std::wstring& strFileName)
 {
-    S32 iDot = strFileName.rfind(L".");
+    S32 iDotPos = strFileName.rfind(L".");
     std::wstring strName = strFileName;
-    if (iDot != std::wstring::npos)
+    if (iDotPos != std::wstring::npos)
     {
-        strName = strFileName.substr(0, iDot - 1);
+        strName = strFileName.substr(0, iDotPos - 1);
     }
     return strName;
 } // GetFileName

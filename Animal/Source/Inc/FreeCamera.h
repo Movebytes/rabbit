@@ -31,19 +31,57 @@ protected:
     Vector3 m_vTranslation;
 public:
     // Default constructor
-    FreeCamera()
-        : Camera()
-        , m_fSpeed(0.5f)
-        , m_vTranslation(0.0f, 0.0f, 0.0f)
-    {}
+    FreeCamera();
+	// Update camera state
     void Update() override;
+	// Move camera
     void Walk(const F32 fDt);
     void Strafe(const F32 fDt);
     void Lift(const F32 fDt);
+	// Set distance for translation
     void SetTranslation(const Vector3 & vTranslation);
     Vector3 GetTranslation() const;
+	// Set speed of translation
     void SetSpeed(const F32 fSpeed);
     const F32 GetSpeed() const;
 }; // FreeCamera
+// Default constructor
+inline FreeCamera::FreeCamera()
+	: Camera()
+{
+	m_fSpeed = 0.5f;
+    m_vTranslation.SetCoords(0.0f, 0.0f, 0.0f);
+}
+// Move camera
+inline void FreeCamera::Walk(const F32 fDt)
+{
+    m_vTranslation += ((D3DXVECTOR3)m_vLook * m_fSpeed * fDt);
+}
+inline void FreeCamera::Strafe(const F32 fDt)
+{
+    m_vTranslation += ((D3DXVECTOR3)m_vRight * m_fSpeed * fDt);
+}
+inline void FreeCamera::Lift(const F32 fDt)
+{
+    m_vTranslation += ((D3DXVECTOR3)m_vUp * m_fSpeed * fDt);
+}
+// Set distance for translation
+inline void FreeCamera::SetTranslation(const Vector3& vTranslation)
+{
+    m_vTranslation = vTranslation;
+}
+inline Vector3 FreeCamera::GetTranslation() const
+{
+    return m_vTranslation;
+}
+// Set speed of translation
+inline void FreeCamera::SetSpeed(const F32 fSpeed)
+{
+    m_fSpeed = fSpeed;
+}
+inline const F32 FreeCamera::GetSpeed() const
+{
+    return m_fSpeed;
+}
 } // aml
 #endif // _AML_FREE_CAMERA_H_

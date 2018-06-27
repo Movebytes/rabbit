@@ -38,31 +38,3 @@ void aml::FreeCamera::Update()
 	m_viewFrustum.CalculatePlanes(m_vRight, m_vUp, m_vLook);
     m_vTranslation.SetCoords(0.0f, 0.0f, 0.0f);
 }
-void aml::FreeCamera::Walk(const F32 fDt)
-{
-    m_vTranslation += ((D3DXVECTOR3)m_vLook * m_fSpeed * fDt);
-}
-void aml::FreeCamera::Strafe(const F32 fDt)
-{
-    m_vTranslation += ((D3DXVECTOR3)m_vRight * m_fSpeed * fDt);
-}
-void aml::FreeCamera::Lift(const F32 fDt)
-{
-    m_vTranslation += ((D3DXVECTOR3)m_vUp * m_fSpeed * fDt);
-}
-void aml::FreeCamera::SetTranslation(const Vector3& vTranslation)
-{
-    m_vTranslation = vTranslation;
-}
-aml::Vector3 aml::FreeCamera::GetTranslation() const
-{
-    return m_vTranslation;
-}
-void aml::FreeCamera::SetSpeed(const F32 fSpeed)
-{
-    m_fSpeed = fSpeed;
-}
-const F32 aml::FreeCamera::GetSpeed() const
-{
-    return m_fSpeed;
-}

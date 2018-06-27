@@ -35,14 +35,7 @@ protected:
     F32 m_fMaxDistance;
 public:
     // Default constructor
-    TargetCamera()
-        : Camera()
-        , m_fMinRy(DEG_TO_RAD(-60.0f))
-        , m_fMaxRy(DEG_TO_RAD(60.0f))
-        , m_fMinDistance(1.0f)
-        , m_fMaxDistance(10.0f)
-        , m_vTarget(0.0f, 0.0f, 10.0f)
-    {}
+    TargetCamera();
 	// Rotate camera
     void Rotate(const F32 fYaw, const F32 fPitch, const F32 fRoll) override;
 	// Update camera state
@@ -56,5 +49,19 @@ public:
     void Zoom(const F32 fAmount);
     void Move(const F32 fDx, const F32 fDy);
 }; // TargetCamera
+// Default constructor
+inline TargetCamera::TargetCamera()
+	: Camera()
+{
+    m_fMinRy = DEG_TO_RAD(-60.0f);
+    m_fMaxRy = DEG_TO_RAD(60.0f);
+    m_fMinDistance = 1.0f;
+    m_fMaxDistance = 10.0f;
+    m_vTarget.SetCoords(0.0f, 0.0f, 10.0f);
+}
+inline const Vector3 TargetCamera::GetTarget() const
+{
+    return m_vTarget;
+}
 } // aml
 #endif // _AML_TARGET_CAMERA_H_

@@ -38,71 +38,69 @@ class Log
 {
 protected:
     // Logged messages
-    std::ostringstream m_messages;
+    std::wostringstream m_wssMessages;
 private:
     // Default copy constructor
-    Log(const Log<T> & log)
-        : m_messages(log.m_messages.str())
+    Log(const Log<T>& log)
+        : m_wssMessages(log.m_wssMessages.str())
     {}
     // Copy and assign logger data
-    Log & operator=(const Log<T> & log);
-    static std::string ToString(LogLevel logLevel);
+    Log& operator=(const Log<T>& log);
+    static std::wstring ToString(LogLevel logLevel);
 public:
     // Default constructor
     Log()
-        : m_messages("")
+        : m_wssMessages(L"")
     {}
     // Default desctructor
     virtual ~Log();
-    std::ostringstream & GetStream(LogLevel logLevel);
-    static LogLevel & GetReportingLevel();
+    std::wostringstream& GetStream(LogLevel logLevel);
+    static LogLevel& GetReportingLevel();
 }; // Log
 // Return log level in string representation
 template <class T>
-std::string Log<T>::ToString(LogLevel logLevel)
+std::wstring Log<T>::ToString(LogLevel logLevel)
 {
-    std::string strLogLevel;
+    std::wstring strLogLevel;
     switch (logLevel)
     {
     case m3e::LOG_LEVEL_INFO:
-        strLogLevel = "INFO";
+        strLogLevel = L"INFO";
         break;
     case m3e::LOG_LEVEL_WARNING:
-        strLogLevel = "WARNING";
+        strLogLevel = L"WARNING";
         break;
     case m3e::LOG_LEVEL_DEBUG:
-        strLogLevel = "DEBUG";
+        strLogLevel = L"DEBUG";
         break;
     case m3e::LOG_LEVEL_ERROR:
-        strLogLevel = "ERROR";
+        strLogLevel = L"ERROR";
         break;
     default:
-        strLogLevel = "UNKNOWN";
+        strLogLevel = L"UNKNOWN";
     }
     return strLogLevel;
 } // toString
 // Return logged messages
 template <class T>
-std::ostringstream & Log<T>::GetStream(LogLevel logLevel)
+std::wostringstream& Log<T>::GetStream(LogLevel logLevel)
 {
     time_t t = time(0);   // get time now
     const S32 BUFFER_SIZE = 256;
-    char buffer[BUFFER_SIZE];
-	strftime(buffer, BUFFER_SIZE, "%T", localtime(&t));
-	// To replace \n
-	buffer[strlen(buffer) - 1] = '\0';
-    m_messages << "- " << buffer << " " << ToString(logLevel) << ": ";
-    return m_messages;
+    std::wstring strBuffer(BUFFER_SIZE, 0);
+	wcsftime(&strBuffer.front(), BUFFER_SIZE, "%T", localtime(&t));
+    m_wssMessages << L"- " << strBuffer << L" " << ToString(logLevel) << L": ";
+    return m_wssMessages;
 } // getStream
 template <class T>
-Log<T> & Log<T>::operator=(const Log<T> & log)
+Log<T>& Log<T>::operator=(const Log<T>& log)
 {
-    m_messages.str(log.m_messages.str());
+    m_wssMessages.str(log.m_wssMessages.str());
     return *this;
 } // operator=
 // Return log level that provide info about what level of logging must be printed
 template <class T>
-LogLevel & Log<T>::GetReportingLevel()
+LogLevel& Log<T>::GetReportingLevel()
 {
     static LogLevel logLevel = LOG_LEVEL_ALL;
     return logLevel;
@@ -111,32 +109,32 @@ LogLevel & Log<T>::GetReportingLevel()
 template <class T>
 Log<T>::~Log()
 {
-    m_messages << std::endl;
-    T::Output(m_messages.str());
+    m_wssMessages << std::endl;
+    T::Output(m_wssMessages.str());
 } // ~Logger
 // Output policy class
 class LogToFile
 {
 public:
-    static void Output(const std::string & message);
-    static void SetStream(FILE * pFile);
-    static FILE *& GetStream();
+    static void Output(const std::wstring& strMessage);
+    static void SetStream(FILE* pFile);
+    static FILE*& GetStream();
 }; // LogToFile
-inline FILE *& LogToFile::GetStream()
+inline FILE*& LogToFile::GetStream()
 {
     // By default output to stderr
-    static FILE * pStream = stderr;
+    static FILE* pStream = stderr;
     return pStream;
 } // getStream
-inline void LogToFile::Output(const std::string & message)
+inline void LogToFile::Output(const std::wstring& strMessage)
 {
     std::lock_guard<std::mutex> lock(mutex);
-    FILE * pStream = LogToFile::GetStream();
+    FILE* pStream = LogToFile::GetStream();
     if (!pStream)
     {
         return;
     }
-    fprintf(pStream, "%s", message.c_str());
+	fwprintf(pStream, L"%s", strMessage.c_str());
     fflush(pStream);
 } // output
 inline void LogToFile::SetStream(FILE * pFile)
@@ -155,7 +153,7 @@ typedef Log<LogToFile> Logger;
 
 // Macro return the stream of messages
 // You can add new messages by << operator
-#define M3E_LOG(logLevel) \
+#define AML_LOG(logLevel) \
     if (logLevel > LOG_MAX_LEVEL); \
     else if (logLevel < Logger::GetReportingLevel() || !LogToFile::GetStream()); \
     else Logger().GetStream(logLevel)

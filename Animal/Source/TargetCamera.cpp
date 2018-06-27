@@ -43,10 +43,6 @@ void aml::TargetCamera::SetTarget(const Vector3& vTarget)
     m_fDistance = m_vPosition.GetDistace(vTarget);
     m_fDistance = MAX(m_fMinDistance, MIN(m_fDistance, m_fMaxDistance));
 }
-const aml::Vector3 aml::TargetCamera::GetTarget() const
-{
-    return m_vTarget;
-}
 void aml::TargetCamera::Rotate(const F32 fYaw, const F32 fPitch, const F32 fRoll)
 {
     F32 fCorrectPitch = MIN(MAX(fPitch, m_fMinRy), m_fMaxRy);
