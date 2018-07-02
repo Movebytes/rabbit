@@ -30,7 +30,7 @@ private:
     std::wstring m_strReport;
 public:
     // Formating helper class
-    class StreamFormatter
+    class TStreamFormatter
     {
     private:
         std::wostringstream m_ossStream;
@@ -40,12 +40,12 @@ public:
             return m_ossStream.str();
         }
         template<typename T>
-        StreamFormatter& operator << (const T& value)
+        TStreamFormatter& operator << (const T& value)
         {
             m_ossStream << value;
             return *this;
         }
-    }; // StreamFormatter
+    }; // TStreamFormatter
     // Default constructor
     Exception(const wchar_t* wszFileName, S32 iLineNum, const std::wstring strMessage);
     // Default destructor
@@ -72,7 +72,7 @@ inline Exception::Exception(const wchar_t* szFileName, S32 iLineNum, const std::
     }
     ssOutput << L"Exception throwed from file \"" << szFileName << L"\" on line " << iLineNum;
     m_strReport = ssOutput.str();
-    AML_LOG(LOG_LEVEL_ERROR) << m_strReport;
+    AML_LOG(LogLevelError) << m_strReport;
 }
 // Default destructor
 inline Exception::~Exception() throw()
@@ -98,7 +98,7 @@ inline const wchar_t* Exception::GetMessage() const throw()
     return m_strMessage.c_str();
 }
 } // aml
-#define AML_EXCEPTION(MESSAGE) throw aml::Exception(__FILE__, __LINE__, (aml::Exception::StreamFormatter() << MESSAGE));
+#define AML_EXCEPTION(MESSAGE) throw aml::Exception(__FILE__, __LINE__, (aml::Exception::TStreamFormatter() << MESSAGE));
 #define AML_ASSERT(condition) \
 if (!condition) \
 { \

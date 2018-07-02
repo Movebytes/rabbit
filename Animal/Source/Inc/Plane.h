@@ -23,11 +23,11 @@ namespace aml {
 // Forward declarations
 class Vector3;
 // Position relative to plane
-enum PlanePosition
+enum EPlanePosition
 {
-    PLANE_POS_COPLANAR,
-    PLANE_POS_FRONT,
-    PLANE_POS_BACK
+    PlanePositionCoplanar,
+    PlanePositionFront,
+    PlanePositionBack
 };
 // Plane class declaration
 class Plane : public D3DXPLANE
@@ -43,9 +43,9 @@ public:
 	// Get distance to plane
 	F32 GetDistance(const Vector3& vPoint) const;
 	// Check point position regarding the plane
-	PlanePosition Classify(const Vector3& vPoint) const;
+	EPlanePosition Classify(const Vector3& vPoint) const;
 	// Check sphere position regarding the plane
-	PlanePosition Classify(const Vector3& vPoint, const F32 fRadius) const;
+	EPlanePosition Classify(const Vector3& vPoint, const F32 fRadius) const;
 }; // Plane
 // Default constructor
 inline Plane::Plane()
@@ -72,37 +72,37 @@ inline F32 Plane::GetDistance(const Vector3& vPoint) const
 	return D3DXPlaneDotCoord(this, &vPoint);
 }
 // Check point position regarding the plane
-inline PlanePosition Plane::Classify(const Vector3& vPoint) const
+inline EPlanePosition Plane::Classify(const Vector3& vPoint) const
 {
 	F32 fDistance = GetDistance(vPoint);
     if (fDistance > EPSILON_E4)
     {
-        return PLANE_POS_FRONT;
+        return PlanePositionFront;
     }
     else if (fDistance < EPSILON_E4)
     {
-        return PLANE_POS_BACK;
+        return PlanePositionBack;
     }
     else
     {
-        return PLANE_POS_COPLANAR;
+        return PlanePositionCoplanar;
     }
 }
 // Check sphere position regarding the plane
-inline PlanePosition Plane::Classify(const Vector3& vPoint, const F32 fRadius) const
+inline EPlanePosition Plane::Classify(const Vector3& vPoint, const F32 fRadius) const
 {
 	F32 fDistance = GetDistance(vPoint);
 	if (fDistance >= -fRadius)
     {
-        return PLANE_POS_FRONT;
+        return PlanePositionFront;
     }
     else if (fDistance < -fRadius)
     {
-        return PLANE_POS_BACK;
+        return PlanePositionBack;
     }
     else
     {
-        return PLANE_POS_COPLANAR;
+        return PlanePositionCoplanar;
     }
 }
 } // aml

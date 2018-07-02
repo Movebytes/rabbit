@@ -23,28 +23,28 @@ namespace aml {
 class Process;
 class ProcessManager;
 // Typedefs
-typedef std::shared_ptr<Process> StrongProcessPtr;
-typedef std::weak_ptr<Process> WeakProcessPtr;
+typedef std::shared_ptr<Process> FStrongProcessPtr;
+typedef std::weak_ptr<Process> FWeakProcessPtr;
 // Process class
 class Process
 {
 	friend class ProcessManager;
 public:
-	enum State
+	enum EProcessState
 	{
-		UNINITIALIZED = 0,
-		REMOVED,
-		RUNNING,
-		PAUSED,
-		SUCCEEDED,
-		FAILED,
-		ABORTED
+		ProcessStateUninitialized = 0,
+		ProcessStateRemoved,
+		ProcessStateRunning,
+		ProcessStatePaused,
+		ProcessStateSucceeded,
+		ProcessStateFailed,
+		ProcessStateAborted
 	};
 private:
-	State m_state;
-	StrongProcessPtr m_pChild;
+	EProcessState m_state;
+	FStrongProcessPtr m_pChild;
 	// Change state
-	void SetState(State state)
+	void SetState(EProcessState state)
 	{
 		m_state = state;
 	}
@@ -60,30 +60,30 @@ public:
 	inline void Pause();
 	inline void UnPause();
 	// Accessors
-	State GetState() const 
+	EProcessState GetState() const 
 	{
 		return m_state;
 	}
 	bool IsAlive() const
 	{
-		return (m_state == RUNNING || m_state == PAUSED);
+		return (m_state == ProcessStateRunning || m_state == ProcessStatePaused);
 	}
 	bool IsDead() const
 	{
-		return (m_state == SUCCEEDED || m_state == FAILED || m_state == ABORTED);
+		return (m_state == ProcessStateSucceeded || m_state == ProcessStateFailed || m_state == ProcessStateAborted);
 	}
 	bool IsRemoved() const 
 	{
-		return (m_state == REMOVED);
+		return (m_state == ProcessStateRemoved);
 	}
 	bool IsPaused() const
 	{
-		return (m_state == PAUSED);
+		return (m_state == ProcessStatePaused);
 	}
 	// Child functions
-	inline void AttachChild(StrongProcessPtr pChild);
-	StrongProcessPtr RemoveChild();
-	StrongProcessPtr GetChild() const
+	inline void AttachChild(FStrongProcessPtr pChild);
+	FStrongProcessPtr RemoveChild();
+	FStrongProcessPtr GetChild() const
 	{
 		return m_pChild;
 	}
@@ -91,7 +91,7 @@ protected:
 	// Have to override in subclass as needed
 	virtual void Init() 
 	{
-		m_state = RUNNING;
+		m_state = ProcessStateRunning;
 	}
 	virtual void Update(U64 iDelta) = 0;
 	virtual void Success() {}

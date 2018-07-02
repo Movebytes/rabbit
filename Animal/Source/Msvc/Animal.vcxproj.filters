@@ -60,6 +60,15 @@
     <ClInclude Include="..\Inc\Material.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="..\Inc\ISceneNode.h">
+      <Filter>Graphics\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inc\SceneNode.h">
+      <Filter>Graphics\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inc\SceneNodeProperties.h">
+      <Filter>Graphics\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -74,6 +83,9 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{0ed1311f-01f0-4708-980b-0e2e14a7afe2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Scene">
+      <UniqueIdentifier>{23d212d5-08fe-41d8-a0ae-761347fc66e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\TargetCamera.cpp">
@@ -87,6 +99,9 @@
     </ClCompile>
     <ClCompile Include="..\Frustum.cpp">
       <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SceneNode.cpp">
+      <Filter>Graphics\Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

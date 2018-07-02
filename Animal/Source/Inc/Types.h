@@ -15,6 +15,7 @@
  */
 #ifndef _AML_TYPES_H_
 #define _AML_TYPES_H_
+#include <d3dx9math.h>
 
 #ifndef _AML_SIGNED_LONG_
 #define _AML_SIGNED_LONG_
@@ -65,5 +66,16 @@ typedef float F32;
 #define _AML_DOUBLE_
 typedef double F64;
 #endif // _AML_DOUBLE_
+
+#ifndef _AML_ACTOR_ID_
+#define _AML_ACTOR_ID_
+typedef U32 FActorId;
+#endif // _AML_ACTOR_ID_
+
+// Define Color type
+#ifndef _AML_COLOR_
+#define _AML_COLOR_
+typedef D3DXCOLOR FColor;
+#endif // _AML_COLOR_
 
 #endif //_AML_TYPES_H_

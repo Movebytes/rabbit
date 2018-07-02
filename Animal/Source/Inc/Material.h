@@ -1,5 +1,5 @@
 /**
- *  Copyright 2017 Movebytes Group
+ *  Copyright 2018 Movebytes Group
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -15,23 +15,20 @@
  */
 #ifndef _AML_MATERIAL_H_
 #define _AML_MATERIAL_H_
-#include <d3dx9math.h>
 #include "Types.h"
 namespace aml {
-// Define Color type
-typedef D3DXCOLOR Color;
 // Transparency constants
-#define FILLED (1.0f)
+#define OPAQUE (1.0f)
 #define TRANSPARENT (0.0f)
 // Basic colors
-Color White(1.0f, 1.0f, 1.0f, FILLED);
-Color Black(0.0f, 0.0f, 0.0f, FILLED);
-Color Cyan(0.0f, 1.0f, 1.0f, FILLED);
-Color Red(1.0f, 0.0f, 0.0f, FILLED);
-Color Green(0.0f, 1.0f, 0.0f, FILLED);
-Color Blue(0.0f, 0.0f, 1.0f, FILLED);
-Color Yellow(1.0f, 1.0f, 0.0f, FILLED);
-Color Transparent(1.0f, 0.0f, 1.0f, TRANSPARENT);
+FColor White(1.0f, 1.0f, 1.0f, OPAQUE);
+FColor Black(0.0f, 0.0f, 0.0f, OPAQUE);
+FColor Cyan(0.0f, 1.0f, 1.0f, OPAQUE);
+FColor Red(1.0f, 0.0f, 0.0f, OPAQUE);
+FColor Green(0.0f, 1.0f, 0.0f, OPAQUE);
+FColor Blue(0.0f, 0.0f, 1.0f, OPAQUE);
+FColor Yellow(1.0f, 1.0f, 0.0f, OPAQUE);
+FColor Transparent(1.0f, 0.0f, 1.0f, TRANSPARENT);
 // Declaration of Material class
 class Material
 {
@@ -41,17 +38,17 @@ public:
 	// Default constructor
 	Material();
 	// Accessors of Ambient part
-	void SetAmbient(const Color& color);
-	const Color GetAmbient() const;
+	void SetAmbient(const FColor& color);
+	const FColor GetAmbient() const;
 	// Accessors of Diffuse part
-	void SetDiffuse(const Color& color);
-	const Color GetDiffuse() const;
+	void SetDiffuse(const FColor& color);
+	const FColor GetDiffuse() const;
 	// Accessors of Specular part
-	void SetSpecular(const Color& color, const F32 fPower);
-	void GetSpecular(Color& OutColor, F32& OutPower) const;
+	void SetSpecular(const FColor& color, const F32 fPower);
+	void GetSpecular(FColor& OutColor, F32& OutPower) const;
 	// Accessors of Emissive part
-	void SetEmissive(const Color& color);
-	const Color GetEmissive() const;
+	void SetEmissive(const FColor& color);
+	const FColor GetEmissive() const;
 	// Accessors of Alpha part
 	void SetAlpha(const F32 fAlpha);
 	F32 GetAlpha() const;
@@ -63,45 +60,45 @@ inline Material::Material()
 {
 	ZeroMemory(&m_data, sizeof(D3DMATERIAL9));
 	m_data.Diffuse = White;
-	m_data.Ambient = Color(0.1f, 0.1f, 0.1f, FILLED);
+	m_data.Ambient = FColor(0.1f, 0.1f, 0.1f, OPAQUE);
 	m_data.Specular = White;
 	m_data.Emissive = Black;
 }
 // Accessors of Ambient part
-inline void Material::SetAmbient(const Color& color)
+inline void Material::SetAmbient(const FColor& color)
 {
 	m_data.Ambient = color;
 }
-inline const Color Material::GetAmbient() const
+inline const FColor Material::GetAmbient() const
 {
 	return m_data.Ambient;
 }
 // Accessors of Diffuse part
-inline void Material::SetDiffuse(const Color& color)
+inline void Material::SetDiffuse(const FColor& color)
 {
 	m_data.Diffuse = color;
 }
-inline const Color Material::GetDiffuse() const
+inline const FColor Material::GetDiffuse() const
 {
 	return m_data.Diffuse;
 }
 // Accessors of Specular part
-inline void Material::SetSpecular(const Color& color, const F32 fPower)
+inline void Material::SetSpecular(const FColor& color, const F32 fPower)
 {
 	m_data.Specular = color;
 	m_data.Power = fPower;
 }
-inline void Material::GetSpecular(Color& OutColor, F32& fOutPower) const
+inline void Material::GetSpecular(FColor& OutColor, F32& fOutPower) const
 {
 	OutColor = m_data.Specular;
 	fOutPower = m_data.Power;
 }
 // Accessors of Emissive part
-inline void Material::SetEmissive(const Color& color)
+inline void Material::SetEmissive(const FColor& color)
 {
 	m_data.Emissive = color;
 }
-inline const Color Material::GetEmissive() const
+inline const FColor Material::GetEmissive() const
 {
 	return m_data.Emissive;
 }
@@ -117,7 +114,7 @@ inline F32 Material::GetAlpha() const
 // Check is alpha
 inline bool Material::HasAlpha() const
 {
-	return GetAlpha() != FILLED;
+	return GetAlpha() != OPAQUE;
 }
 } // aml
 #endif // _AML_MATERIAL_H_

@@ -84,6 +84,9 @@
     <ClInclude Include="..\Inc\Process.h" />
     <ClInclude Include="..\Inc\ProcessManager.h" />
     <ClInclude Include="..\Inc\Quaternion.h" />
+    <ClInclude Include="..\Inc\ISceneNode.h" />
+    <ClInclude Include="..\Inc\SceneNode.h" />
+    <ClInclude Include="..\Inc\SceneNodeProperties.h" />
     <ClInclude Include="..\Inc\SystemUtil.h" />
     <ClInclude Include="..\Inc\TargetCamera.h" />
     <ClInclude Include="..\Inc\Timer.h" />
@@ -96,6 +99,7 @@
     <ClCompile Include="..\Camera.cpp" />
     <ClCompile Include="..\FreeCamera.cpp" />
     <ClCompile Include="..\Frustum.cpp" />
+    <ClCompile Include="..\SceneNode.cpp" />
     <ClCompile Include="..\TargetCamera.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

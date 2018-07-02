@@ -27,19 +27,19 @@ class Vector3;
 class Frustum
 {
 public:
-	enum FrustumSide 
+	enum EFrustumSide 
 	{
-		Near = 0,
-		Far,
-		Top, 
-		Right,
-		Bottom,
-		Left,
-		NumPlanes
+		FrustumSideNear = 0,
+		FrustumSideFar,
+		FrustumSideTop, 
+		FrustumSideRight,
+		FrustumSideBottom,
+		FrustumSideLeft,
+		FrustumSideNumPlanes
 	};
 private:
     // Frustum planes
-    Plane m_arrPlanes[NumPlanes];
+    Plane m_arrPlanes[FrustumSideNumPlanes];
     // Frustum points
     Vector3 m_arrFarPoints[4];
     Vector3 m_arrNearPoints[4];
@@ -63,7 +63,7 @@ public:
 	// Check is Box inside
     bool Contains(const Vector3& vMin, const Vector3& vMax) const;
 	// Get plane of frustum
-	const Plane& GetPlane(FrustumSide Side) const;
+	const Plane& GetPlane(EFrustumSide Side) const;
 	// Accessors of field of view
 	void SetFOV(const F32 fFOV);
 	F32 GetFOV() const;
@@ -86,7 +86,7 @@ inline Frustum::Frustum()
     m_fAr = 1.0f;
 }
 // Get plane of frustum
-inline const Plane& Frustum::GetPlane(FrustumSide Side) const
+inline const Plane& Frustum::GetPlane(EFrustumSide Side) const
 {
 	return m_arrPlanes[Side];
 }

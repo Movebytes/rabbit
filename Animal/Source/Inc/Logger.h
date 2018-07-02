@@ -23,57 +23,57 @@
 #include "Types.h"
 static std::mutex mutex;
 namespace aml {
-enum LogLevel
+enum ELogLevel
 {
-    LOG_LEVEL_ALL = 0,
-    LOG_LEVEL_DEBUG,
-    LOG_LEVEL_INFO,
-    LOG_LEVEL_WARNING,
-    LOG_LEVEL_ERROR,
-    LOG_LEVEL_NONE
+    LogLevelAll = 0,
+    LogLevelDebug,
+    LogLevelInfo,
+    LogLevelWarning,
+    LogLevelError,
+    LogLevelNone
 };
 // Declaration of log class
 template <class T>
-class Log
+class TLog
 {
 protected:
     // Logged messages
     std::wostringstream m_wssMessages;
 private:
     // Default copy constructor
-    Log(const Log<T>& log)
+    TLog(const TLog<T>& log)
         : m_wssMessages(log.m_wssMessages.str())
     {}
     // Copy and assign logger data
-    Log& operator=(const Log<T>& log);
-    static std::wstring ToString(LogLevel logLevel);
+    TLog& operator=(const TLog<T>& log);
+    static std::wstring ToString(ELogLevel logLevel);
 public:
     // Default constructor
-    Log()
+    TLog()
         : m_wssMessages(L"")
     {}
     // Default desctructor
     virtual ~Log();
-    std::wostringstream& GetStream(LogLevel logLevel);
-    static LogLevel& GetReportingLevel();
+    std::wostringstream& GetStream(ELogLevel logLevel);
+    static ELogLevel& GetReportingLevel();
 }; // Log
 // Return log level in string representation
 template <class T>
-std::wstring Log<T>::ToString(LogLevel logLevel)
+std::wstring TLog<T>::ToString(ELogLevel logLevel)
 {
     std::wstring strLogLevel;
     switch (logLevel)
     {
-    case m3e::LOG_LEVEL_INFO:
+    case LogLevelInfo:
         strLogLevel = L"INFO";
         break;
-    case m3e::LOG_LEVEL_WARNING:
+    case LogLevelWarning:
         strLogLevel = L"WARNING";
         break;
-    case m3e::LOG_LEVEL_DEBUG:
+    case LogLevelDebug:
         strLogLevel = L"DEBUG";
         break;
-    case m3e::LOG_LEVEL_ERROR:
+    case LogLevelError:
         strLogLevel = L"ERROR";
         break;
     default:
@@ -83,7 +83,7 @@ std::wstring Log<T>::ToString(LogLevel logLevel)
 } // toString
 // Return logged messages
 template <class T>
-std::wostringstream& Log<T>::GetStream(LogLevel logLevel)
+std::wostringstream& TLog<T>::GetStream(ELogLevel logLevel)
 {
     time_t t = time(0);   // get time now
     const S32 BUFFER_SIZE = 256;
@@ -93,21 +93,21 @@ std::wostringstream& Log<T>::GetStream(LogLevel logLevel)
     return m_wssMessages;
 } // getStream
 template <class T>
-Log<T>& Log<T>::operator=(const Log<T>& log)
+TLog<T>& TLog<T>::operator=(const TLog<T>& log)
 {
     m_wssMessages.str(log.m_wssMessages.str());
     return *this;
 } // operator=
 // Return log level that provide info about what level of logging must be printed
 template <class T>
-LogLevel& Log<T>::GetReportingLevel()
+ELogLevel& TLog<T>::GetReportingLevel()
 {
-    static LogLevel logLevel = LOG_LEVEL_ALL;
+    static ELogLevel logLevel = LogLevelAll;
     return logLevel;
 } // getReportingLevel
 // Destroy the logging object and prS32 the logging messages
 template <class T>
-Log<T>::~Log()
+TLog<T>::~Log()
 {
     m_wssMessages << std::endl;
     T::Output(m_wssMessages.str());
@@ -137,25 +137,25 @@ inline void LogToFile::Output(const std::wstring& strMessage)
 	fwprintf(pStream, L"%s", strMessage.c_str());
     fflush(pStream);
 } // output
-inline void LogToFile::SetStream(FILE * pFile)
+inline void LogToFile::SetStream(FILE* pFile)
 {
     std::lock_guard<std::mutex> lock(mutex);
     LogToFile::GetStream() = pFile;
 } // setStream
 
 // Logger instance
-typedef Log<LogToFile> Logger;
+typedef TLog<LogToFile> FLogger;
 
 // Define max level logging
 #ifndef LOG_MAX_LEVEL
-#define LOG_MAX_LEVEL LOG_LEVEL_NONE
+#define LOG_MAX_LEVEL LogLevelNone
 #endif
 
 // Macro return the stream of messages
 // You can add new messages by << operator
 #define AML_LOG(logLevel) \
     if (logLevel > LOG_MAX_LEVEL); \
-    else if (logLevel < Logger::GetReportingLevel() || !LogToFile::GetStream()); \
-    else Logger().GetStream(logLevel)
+    else if (logLevel < FLogger::GetReportingLevel() || !LogToFile::GetStream()); \
+    else FLogger().GetStream(logLevel)
 } // aml
 #endif // _AML_LOGGER_H_
