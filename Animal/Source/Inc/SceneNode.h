@@ -66,47 +66,112 @@ protected:
 	// Alpha blending type
 	EAlphaBlendingType m_AlphaBlendingType;
 	// Position vector
-    Vector3 m_vecPosition;
+    Vector3 m_vPosition;
     // Rotation vector
-    Vector3 m_vecRotation;
+    Vector3 m_vRotation;
     // Scaling vector
-    Vector3 m_vecScale;
+    Vector3 m_vScale;
     // World matrix
-    Matrix4 m_matWorld;
+    Matrix4 m_mWorld;
     // Build world matrix
     virtual void BuildWorldMatrix();
 public:
 	// Default constructor
-	SceneNode();
+	SceneNode(std::wstring strName,
+			  ERenderPass RenderPass,
+			  const FColor& Color);
 	// Default destructor
-	~SceneNode() override;
+	virtual ~SceneNode() override;
 	// Restore state
-	HRESULT Restore(const Scene* pScene) override;
+	virtual HRESULT Restore(const Scene* pScene) override;
+	// Update state
+	virtual HRESULT Update(const Scene* pScene, const F64 iDt) override;
 	// Pre render node
-	HRESULT PreRender(const Scene* pScene) override;
+	virtual HRESULT PreRender(const Scene* pScene) override;
 	// Render node
-	HRESULT Render(const Scene* pScene) override;
+	virtual HRESULT Render(const Scene* pScene) override;
 	// Render children nodes
-	HRESULT RenderChildren(const Scene* pScene) override;
+	virtual HRESULT RenderChildren(const Scene* pScene) override;
 	// Post render node
-	HRESULT PostRender(const Scene* pScene) override;
+	virtual HRESULT PostRender(const Scene* pScene) override;
 	// Add child node
-	bool AddChild(std::shared_ptr<ISceneNode> child) override;
+	virtual bool AddChild(std::shared_ptr<ISceneNode> child) override;
 	// Remove child node
-	bool RemoveChild(FActorId id) override;
+	virtual bool RemoveChild(FActorId id) override;
 	// Is node visible
-	bool IsVisible(const Scene* scene) const override;
+	virtual bool IsVisible(const Scene* scene) const override;
 	// Set and Get alpha
 	void SetAlpha(const F32 fAlpha);
 	F32 GetAlpha() const;
 	// Get and Set position
 	Vector3 GetPosition() const;
 	void SetPosition(const Vector3& vPosition);
-	// Set radius
-	void SetRadius(const F32 fRadius);
+	// Get and Set rotation
+	Vector3 GetRotation() const;
+	void SetRotation(const Vector3& vRotation);
+	// Get and Set scale
+	Vector3 GetScale() const;
+	void SetScale(const Vector3& vScale);
 	// Set material
 	void SetMaterial(const Material& material);
 }; // SceneNode
-
+// Pre render node
+inline HRESULT SceneNode::PreRender(const Scene* pScene)
+{
+	pScene->PushAndSetMatrix(m_mWorld);
+	return S_OK;
+}
+// Render node
+inline HRESULT SceneNode::Render(const Scene* pScene)
+{
+	return S_OK;
+}
+// Post render node
+inline HRESULT SceneNode::PostRender(const Scene* pScene)
+{
+	pScene->PopMatrix();
+	return S_OK;
+}
+// Set and Get alpha
+inline void SceneNode::SetAlpha(const F32 fAlpha)
+{
+	m_Material.SetAlpha(fAlpha);
+}
+inline F32 SceneNode::GetAlpha() const
+{
+	return m_Material.GetAlpha();
+}
+// Get and Set position
+inline Vector3 SceneNode::GetPosition() const
+{
+	return m_vPosition;
+}
+inline void SceneNode::SetPosition(const Vector3& vPosition)
+{
+	m_vPosition = vPosition;
+}
+// Get and Set rotation
+inline Vector3 SceneNode::GetRotation() const
+{
+	return m_vRotation;
+}
+inline void SceneNode::SetRotation(const Vector3& vRotation)
+{
+	m_vRotation = vRotation;
+}
+// Get and Set scale
+inline Vector3 SceneNode::GetScale() const
+{
+	return m_vScale;
+}
+inline void SceneNode::SetScale(const Vector3& vScale)
+{
+	m_vScale = vScale;
+}
+// Set material
+inline void SceneNode::SetMaterial(const Material& material)
+{
+	m_Material = material;
+}
 } // aml
 #endif // _AML_SCENE_NODE_H_
