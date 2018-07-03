@@ -43,35 +43,71 @@ void aml::SceneNode::BuildWorldMatrix()
 // Restore state
 HRESULT aml::SceneNode::Restore(const Scene* pScene)
 {
-	FSceneNodeList::iterator i = m_Children.begin();
-	FSceneNodeList::iterator end = m_Children.end();
-	while (i != end)
+	HRESULT hResult = S_OK;
+	for (const auto& it : m_Children)
 	{
-		(*i)->Restore(pScene);
-		++i;
+		hResult = it->Restore(pScene);
 	}
-	return S_OK;
+	return hResult;
 }
 // Update state
 HRESULT aml::SceneNode::Update(const Scene* pScene, const F64 iDt)
 {
 	// Update world matrix
 	BuildWorldMatrix();
-	// Iterate over children
-	FSceneNodeList::iterator i = m_Children.begin();
-	FSceneNodeList::iterator end = m_Children.end();
-	while (i != end)
+	// Iterate over all children
+	HRESULT hResult = S_OK;
+	for (const auto& it : m_Children)
 	{
-		(*i)->Update(pScene, iDt);
-		++i;
+		hResult = it->Update(pScene, iDt);
 	}
-	return S_OK;
+	return hResult;
 }
 // Render children nodes
-HRESULT RenderChildren(const Scene* pScene) override;
+HRESULT aml::SceneNode::RenderChildren(const Scene* pScene)
+{
+	HRESULT hResult = S_OK;
+	// Iterate over all children
+	for (const auto& it : m_Children)
+	{
+		// Pre render setup
+		if (it->PreRender(pScene) == S_OK)
+		{
+			// Render only visible node
+			if (it->IsVisible(pScene))
+			{
+				F32 fAlpha = it->GetMaterial().GetAlpha();
+				// First render only opaque node
+				if (fAlpha == OPAQUE)
+				{
+					hResult = it->Render(pScene);
+				}
+				else if (fAlpha != TRANSPARENT)
+				{
+					// Collect transparent nodes
+
+				}
+			}
+			// Render children node
+			hResult = it->RenderChildren(pScene);
+		}
+		// Post render setup
+		it->PostRender(pScene);
+	}
+	return hResult;
+}
 // Add child node
-bool AddChild(std::shared_ptr<ISceneNode> child) override;
+bool aml::SceneNode::AddChild(std::shared_ptr<ISceneNode> child)
+{
+}
 // Remove child node
-bool RemoveChild(FActorId id) override;
+bool aml::SceneNode::RemoveChild(FActorId id) 
+{
+}
 // Is node visible
-bool IsVisible(const Scene* scene) const override;
+bool aml::SceneNode::IsVisible(const Scene* scene) const
+{
+}
+HRESULT aml::SceneNode:: LostDevice(const Scene* pScene)
+{
+}

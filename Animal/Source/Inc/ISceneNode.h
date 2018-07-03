@@ -49,6 +49,8 @@ public:
 	virtual HRESULT LostDevice(const Scene* pScene) = 0;
 	// Is node visible
 	virtual bool IsVisible(const Scene* scene) const = 0;
+	// Get material
+	virtual const Material& GetMaterial() const = 0;
 }; // ISceneNode
 // Default destructor
 inline ISceneNode::~ISceneNode()

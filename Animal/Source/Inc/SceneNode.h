@@ -100,6 +100,8 @@ public:
 	virtual bool RemoveChild(FActorId id) override;
 	// Is node visible
 	virtual bool IsVisible(const Scene* scene) const override;
+	// Handle losing device
+	virtual HRESULT LostDevice(const Scene* pScene) override;
 	// Set and Get alpha
 	void SetAlpha(const F32 fAlpha);
 	F32 GetAlpha() const;
@@ -114,11 +116,12 @@ public:
 	void SetScale(const Vector3& vScale);
 	// Set material
 	void SetMaterial(const Material& material);
+	virtual const Material& GetMaterial() const override;
 }; // SceneNode
 // Pre render node
 inline HRESULT SceneNode::PreRender(const Scene* pScene)
 {
-	pScene->PushAndSetMatrix(m_mWorld);
+	pScene->PushMatrix(m_mWorld);
 	return S_OK;
 }
 // Render node
@@ -172,6 +175,10 @@ inline void SceneNode::SetScale(const Vector3& vScale)
 inline void SceneNode::SetMaterial(const Material& material)
 {
 	m_Material = material;
+}
+inline const Material& SceneNode::GetMaterial() const
+{
+	return m_Material;
 }
 } // aml
 #endif // _AML_SCENE_NODE_H_
