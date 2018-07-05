@@ -84,7 +84,10 @@ HRESULT aml::SceneNode::RenderChildren(const Scene* pScene)
 				}
 				else if (fAlpha != TRANSPARENT)
 				{
-					// Collect transparent nodes
+					// Collect almost transparent nodes
+					AlphaSceneNode* pAlphaNode = new AlphaSceneNode;
+					pAlphaNode->pNode = it;
+					pAlphaNode->mWorldMatrix = pScene->GetTopMatrix();
 
 				}
 			}

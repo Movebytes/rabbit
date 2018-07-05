@@ -16,6 +16,7 @@
 #ifndef _AML_SCENE_NODE_H_
 #define _AML_SCENE_NODE_H_
 #include <vector>
+#include <list>
 #include <memory>
 #include <string>
 #include "Vector3.h"
@@ -49,6 +50,23 @@ enum EAlphaBlendingType
 	AlphaBlendingTypeMaterial,
 	AlphaBlendingTypeVertex
 };
+// Declaration of transparent node struct
+struct AlphaSceneNode
+{
+	// Pointer for a node
+	std::shared_ptr<ISceneNode> pNode;
+	// Depth position
+	F32 fDepth;
+	// World matrix
+	Matrix4 mWorldMatrix;
+	// For sorting in depth
+	bool const operator<(const AlphaSceneNode& Node)
+	{
+		return fDepth < Node.fDepth;
+	}
+};
+// Define transparent nodes list
+typedef std::list<AlphaSceneNode*> FAlphaSceneNodeList;
 // Declaration of SceneNode
 class SceneNode : public ISceneNode
 {
