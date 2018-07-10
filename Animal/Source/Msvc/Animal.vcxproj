@@ -86,7 +86,6 @@
     <ClInclude Include="..\Inc\Quaternion.h" />
     <ClInclude Include="..\Inc\ISceneNode.h" />
     <ClInclude Include="..\Inc\SceneNode.h" />
-    <ClInclude Include="..\Inc\SceneNodeProperties.h" />
     <ClInclude Include="..\Inc\SystemUtil.h" />
     <ClInclude Include="..\Inc\TargetCamera.h" />
     <ClInclude Include="..\Inc\Timer.h" />
