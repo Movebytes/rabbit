@@ -20,6 +20,7 @@
 #include <cstring>
 #include <sstream>
 #include <time.h>
+#include "Macros.h"
 #include "Types.h"
 static std::mutex mutex;
 namespace aml {
@@ -50,7 +51,7 @@ private:
 public:
     // Default constructor
     TLog()
-        : m_wssMessages(L"")
+        : m_wssMessages(AML_TEXT(""))
     {}
     // Default desctructor
     virtual ~Log();
@@ -65,19 +66,19 @@ std::wstring TLog<T>::ToString(ELogLevel logLevel)
     switch (logLevel)
     {
     case LogLevelInfo:
-        strLogLevel = L"INFO";
+        strLogLevel = AML_TEXT("INFO");
         break;
     case LogLevelWarning:
-        strLogLevel = L"WARNING";
+        strLogLevel = AML_TEXT("WARNING");
         break;
     case LogLevelDebug:
-        strLogLevel = L"DEBUG";
+        strLogLevel = AML_TEXT("DEBUG");
         break;
     case LogLevelError:
-        strLogLevel = L"ERROR";
+        strLogLevel = AML_TEXT("ERROR");
         break;
     default:
-        strLogLevel = L"UNKNOWN";
+        strLogLevel = AML_TEXT("UNKNOWN");
     }
     return strLogLevel;
 } // toString
@@ -89,7 +90,7 @@ std::wostringstream& TLog<T>::GetStream(ELogLevel logLevel)
     const S32 BUFFER_SIZE = 256;
     std::wstring strBuffer(BUFFER_SIZE, 0);
 	wcsftime(&strBuffer.front(), BUFFER_SIZE, "%T", localtime(&t));
-    m_wssMessages << L"- " << strBuffer << L" " << ToString(logLevel) << L": ";
+    m_wssMessages << AML_TEXT("- ") << strBuffer << AML_TEXT(" ") << ToString(logLevel) << AML_TEXT(": ");
     return m_wssMessages;
 } // getStream
 template <class T>
@@ -134,7 +135,7 @@ inline void LogToFile::Output(const std::wstring& strMessage)
     {
         return;
     }
-	fwprintf(pStream, L"%s", strMessage.c_str());
+	fwprintf(pStream, AML_TEXT("%s"), strMessage.c_str());
     fflush(pStream);
 } // output
 inline void LogToFile::SetStream(FILE* pFile)

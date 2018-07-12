@@ -14,6 +14,7 @@
  *  limitations under the License.
  */
 #include "Inc\SceneNode.h"
+#include "Inc\Exception.h"
 // Default constructor
 aml::SceneNode::SceneNode(std::wstring strName,
 						  ERenderPass RenderPass,
@@ -35,17 +36,23 @@ aml::SceneNode::SceneNode(std::wstring strName,
 void aml::SceneNode::BuildWorldMatrix()
 {
 	Matrix4 mPosition, mRotation, mScale;
+	// Build translation matrix
     mPosition.FromTranslation(m_vPosition);
+	// Build rotation matrix
 	mRotation.FromRotationZYX(m_vRotation.z, m_vRotation.y, m_vRotation.x);
+	// Build scale matrix
 	mScale.FromScaling(m_vScale.x, m_vScale.y, m_vScale.z);
+	// Combine matrices
     m_mWorld = mPosition * mRotation * mScale;
 }
 // Restore state
 HRESULT aml::SceneNode::Restore(const Scene* pScene)
 {
+	// Iterate over all children
 	HRESULT hResult = S_OK;
 	for (const auto& it : m_Children)
 	{
+		// Restore every child
 		hResult = it->Restore(pScene);
 	}
 	return hResult;
@@ -59,6 +66,7 @@ HRESULT aml::SceneNode::Update(const Scene* pScene, const F64 iDt)
 	HRESULT hResult = S_OK;
 	for (const auto& it : m_Children)
 	{
+		// Update every child
 		hResult = it->Update(pScene, iDt);
 	}
 	return hResult;
@@ -86,6 +94,7 @@ HRESULT aml::SceneNode::RenderChildren(const Scene* pScene)
 				{
 					// Collect almost transparent nodes
 					AlphaSceneNode* pAlphaNode = new AlphaSceneNode;
+					AML_ASSERT(pAlphaNode);
 					pAlphaNode->pNode = it;
 					pAlphaNode->mWorldMatrix = pScene->GetTopMatrix();
 

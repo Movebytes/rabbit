@@ -17,6 +17,7 @@
 #define _AML_EXCEPTION_H_
 #include <exception>
 #include <string>
+#include "Macros.h"
 #include "Logger.h"
 #include "Types.h"
 namespace aml {
@@ -60,8 +61,8 @@ public:
     const wchar_t* GetMessage() const throw();
 }; // Exception
 // Default constructor
-inline Exception::Exception(const wchar_t* szFileName, S32 iLineNum, const std::wstring strMessage)
-    : m_wszFileName(szFileName)
+inline Exception::Exception(const wchar_t* wszFileName, S32 iLineNum, const std::wstring strMessage)
+    : m_wszFileName(wszFileName)
     , m_iLineNum(iLineNum)
     , m_strMessage(strMessage)
 {
@@ -70,7 +71,7 @@ inline Exception::Exception(const wchar_t* szFileName, S32 iLineNum, const std::
     {
         ssOutput << strMessage << L"  ";
     }
-    ssOutput << L"Exception throwed from file \"" << szFileName << L"\" on line " << iLineNum;
+    ssOutput << AML_TEXT("Exception throwed from file \"") << wszFileName << AML_TEXT("\" on line ") << iLineNum;
     m_strReport = ssOutput.str();
     AML_LOG(LogLevelError) << m_strReport;
 }
@@ -98,10 +99,11 @@ inline const wchar_t* Exception::GetMessage() const throw()
     return m_strMessage.c_str();
 }
 } // aml
-#define AML_EXCEPTION(MESSAGE) throw aml::Exception(__FILE__, __LINE__, (aml::Exception::TStreamFormatter() << MESSAGE));
+#define __WFILE__ AML_RUNTIME_TEXT(__FILE__)
+#define AML_EXCEPTION(MESSAGE) throw aml::Exception(__WFILE__, __LINE__, (aml::Exception::TStreamFormatter() << MESSAGE));
 #define AML_ASSERT(condition) \
 if (!condition) \
 { \
-    AML_EXCEPTION("Assertion failure!") \
+    AML_EXCEPTION(AML_TEXT("Assertion failure!")) \
 }
 #endif // _AML_EXCEPTION_H_
