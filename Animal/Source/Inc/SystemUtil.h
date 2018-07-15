@@ -59,5 +59,5 @@ inline std::wstring GetFileName(const std::wstring& strFileName)
     }
     return strName;
 } // GetFileName
-} // m3e
-#endif // _M3E_SYSTEM_UTIL_H_
+} // aml
+#endif // _AML_SYSTEM_UTIL_H_

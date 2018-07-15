@@ -111,6 +111,8 @@ HRESULT aml::SceneNode::RenderChildren(const Scene* pScene)
 // Add child node
 bool aml::SceneNode::AddChild(std::shared_ptr<ISceneNode> child)
 {
+	m_Children.push_back(child);
+	// Todo: calc bounding object
 }
 // Remove child node
 bool aml::SceneNode::RemoveChild(FActorId id) 

@@ -181,5 +181,5 @@ inline U32 BGRA32(U8 blue, U8 green, U8 red, U8 alpha)
 #endif
     return color;
 }
-} // m3e
-#endif // _M3E_COLOR_UTIL_H_
+} // aml
+#endif // _AML_COLOR_UTIL_H_
