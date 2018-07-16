@@ -97,7 +97,7 @@ HRESULT aml::SceneNode::RenderChildren(const Scene* pScene)
 					AML_ASSERT(pAlphaNode);
 					pAlphaNode->pNode = it;
 					pAlphaNode->mWorldMatrix = pScene->GetTopMatrix();
-
+					// todo: 
 				}
 			}
 			// Render children node

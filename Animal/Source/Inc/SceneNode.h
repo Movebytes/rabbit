@@ -23,6 +23,7 @@
 #include "Matrix4.h"
 #include "Material.h"
 #include "ISceneNode.h"
+#include "Scene.h"
 #include "Types.h"
 namespace aml {
 // Forward declarations
@@ -30,6 +31,7 @@ class Vector3;
 class Matrix4;
 class Material;
 class ISceneNode;
+class Scene;
 // Define scene node list
 typedef std::vector<std::shared_ptr<ISceneNode> > FSceneNodeList;
 // Define render pass

@@ -66,6 +66,9 @@
     <ClInclude Include="..\Inc\SceneNode.h">
       <Filter>Graphics\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Inc\Scene.h">
+      <Filter>Graphics\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -98,6 +101,9 @@
       <Filter>Graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\SceneNode.cpp">
+      <Filter>Graphics\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Scene.cpp">
       <Filter>Graphics\Scene</Filter>
     </ClCompile>
   </ItemGroup>
