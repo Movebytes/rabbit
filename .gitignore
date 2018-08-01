@@ -28,6 +28,7 @@ ipch
 # Folders
 
 Temp/*
+.vs
 
 # Another files
 
