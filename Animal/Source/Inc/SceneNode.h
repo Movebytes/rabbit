@@ -22,6 +22,7 @@
 #include "Vector3.h"
 #include "Matrix4.h"
 #include "Material.h"
+#include "TransformComponent.h"
 #include "ISceneNode.h"
 #include "Scene.h"
 #include "Types.h"
@@ -30,6 +31,7 @@ namespace aml {
 class Vector3;
 class Matrix4;
 class Material;
+class TransformComponent;
 class ISceneNode;
 class Scene;
 // Define scene node list
@@ -85,16 +87,8 @@ protected:
 	Material m_Material;
 	// Alpha blending type
 	EAlphaBlendingType m_AlphaBlendingType;
-	// Position vector
-    Vector3 m_vPosition;
-    // Rotation vector
-    Vector3 m_vRotation;
-    // Scaling vector
-    Vector3 m_vScale;
-    // World matrix
-    Matrix4 m_mWorld;
-    // Build world matrix
-    virtual void BuildWorldMatrix();
+	// World transform
+	TransformComponent m_Transform;
 public:
 	// Default constructor
 	SceneNode(std::wstring strName,
@@ -125,15 +119,8 @@ public:
 	// Set and Get alpha
 	void SetAlpha(const F32 fAlpha);
 	F32 GetAlpha() const;
-	// Get and Set position
-	Vector3 GetPosition() const;
-	void SetPosition(const Vector3& vPosition);
-	// Get and Set rotation
-	Vector3 GetRotation() const;
-	void SetRotation(const Vector3& vRotation);
-	// Get and Set scale
-	Vector3 GetScale() const;
-	void SetScale(const Vector3& vScale);
+	// Get transform component
+	const TransformComponent& GetTransform() const;
 	// Set material
 	void SetMaterial(const Material& material);
 	virtual const Material& GetMaterial() const override;
@@ -164,32 +151,10 @@ inline F32 SceneNode::GetAlpha() const
 {
 	return m_Material.GetAlpha();
 }
-// Get and Set position
-inline Vector3 SceneNode::GetPosition() const
+// Get transform component
+const TransformComponent& SceneNode::GetTransform() const
 {
-	return m_vPosition;
-}
-inline void SceneNode::SetPosition(const Vector3& vPosition)
-{
-	m_vPosition = vPosition;
-}
-// Get and Set rotation
-inline Vector3 SceneNode::GetRotation() const
-{
-	return m_vRotation;
-}
-inline void SceneNode::SetRotation(const Vector3& vRotation)
-{
-	m_vRotation = vRotation;
-}
-// Get and Set scale
-inline Vector3 SceneNode::GetScale() const
-{
-	return m_vScale;
-}
-inline void SceneNode::SetScale(const Vector3& vScale)
-{
-	m_vScale = vScale;
+	return m_Transform;
 }
 // Set material
 inline void SceneNode::SetMaterial(const Material& material)

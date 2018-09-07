@@ -77,11 +77,13 @@
     <ClInclude Include="..\Inc\Exception.h" />
     <ClInclude Include="..\Inc\FreeCamera.h" />
     <ClInclude Include="..\Inc\Frustum.h" />
+    <ClInclude Include="..\Inc\IComponent.h" />
     <ClInclude Include="..\Inc\Logger.h" />
     <ClInclude Include="..\Inc\Macros.h" />
     <ClInclude Include="..\Inc\Material.h" />
     <ClInclude Include="..\Inc\Matrix4.h" />
     <ClInclude Include="..\Inc\Plane.h" />
+    <ClInclude Include="..\Inc\TransformComponent.h" />
     <ClInclude Include="..\Inc\Process.h" />
     <ClInclude Include="..\Inc\ProcessManager.h" />
     <ClInclude Include="..\Inc\Quaternion.h" />

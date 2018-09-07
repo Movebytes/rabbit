@@ -24,26 +24,8 @@ aml::SceneNode::SceneNode(std::wstring strName,
 	m_RenderPass = RenderPass;
 	m_AlphaBlendingType = AlphaBlendingTypeOpaque;
 	m_Material.SetDiffuse(Color);
-	// Set default params
-    m_vScale.SetCoords(1.0f, 1.0f, 1.0f);
-	m_vPosition.SetCoords(0.0f, 0.0f, 0.0f);
-	m_vRotation.SetCoords(0.0f, 0.0f, 0.0f);
 	m_strName = strName;
-	// Build world matrix
-    BuildWorldMatrix();
-}
-// Build world matrix
-void aml::SceneNode::BuildWorldMatrix()
-{
-	Matrix4 mPosition, mRotation, mScale;
-	// Build translation matrix
-    mPosition.FromTranslation(m_vPosition);
-	// Build rotation matrix
-	mRotation.FromRotationZYX(m_vRotation.z, m_vRotation.y, m_vRotation.x);
-	// Build scale matrix
-	mScale.FromScaling(m_vScale.x, m_vScale.y, m_vScale.z);
-	// Combine matrices
-    m_mWorld = mPosition * mRotation * mScale;
+	m_Transform.Init();
 }
 // Restore state
 HRESULT aml::SceneNode::Restore(const Scene* pScene)
@@ -61,7 +43,7 @@ HRESULT aml::SceneNode::Restore(const Scene* pScene)
 HRESULT aml::SceneNode::Update(const Scene* pScene, const F64 iDt)
 {
 	// Update world matrix
-	BuildWorldMatrix();
+	m_Transform.Update(iDt);
 	// Iterate over all children
 	HRESULT hResult = S_OK;
 	for (const auto& it : m_Children)
