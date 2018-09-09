@@ -22,7 +22,7 @@
 #include "Vector3.h"
 #include "Matrix4.h"
 #include "Material.h"
-#include "TransformComponent.h"
+#include "Transform.h"
 #include "ISceneNode.h"
 #include "Scene.h"
 #include "Types.h"
@@ -31,7 +31,7 @@ namespace aml {
 class Vector3;
 class Matrix4;
 class Material;
-class TransformComponent;
+class Transform;
 class ISceneNode;
 class Scene;
 // Define scene node list
@@ -88,7 +88,7 @@ protected:
 	// Alpha blending type
 	EAlphaBlendingType m_AlphaBlendingType;
 	// World transform
-	TransformComponent m_Transform;
+	Transform m_Transform;
 public:
 	// Default constructor
 	SceneNode(std::wstring strName,
@@ -116,11 +116,8 @@ public:
 	virtual bool IsVisible(const Scene* scene) const override;
 	// Handle losing device
 	virtual HRESULT LostDevice(const Scene* pScene) override;
-	// Set and Get alpha
-	void SetAlpha(const F32 fAlpha);
-	F32 GetAlpha() const;
-	// Get transform component
-	const TransformComponent& GetTransform() const;
+	// Get transform data
+	const Transform& GetTransform() const;
 	// Set material
 	void SetMaterial(const Material& material);
 	virtual const Material& GetMaterial() const override;
@@ -142,17 +139,8 @@ inline HRESULT SceneNode::PostRender(const Scene* pScene)
 	pScene->PopMatrix();
 	return S_OK;
 }
-// Set and Get alpha
-inline void SceneNode::SetAlpha(const F32 fAlpha)
-{
-	m_Material.SetAlpha(fAlpha);
-}
-inline F32 SceneNode::GetAlpha() const
-{
-	return m_Material.GetAlpha();
-}
 // Get transform component
-const TransformComponent& SceneNode::GetTransform() const
+const Transformt& SceneNode::GetTransform() const
 {
 	return m_Transform;
 }

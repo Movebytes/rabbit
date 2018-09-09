@@ -69,11 +69,8 @@
     <ClInclude Include="..\Inc\Scene.h">
       <Filter>Graphics\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Inc\IComponent.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Inc\TransformComponent.h">
-      <Filter>Common</Filter>
+    <ClInclude Include="..\Inc\Transform.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,9 +88,6 @@
     </Filter>
     <Filter Include="Graphics\Scene">
       <UniqueIdentifier>{23d212d5-08fe-41d8-a0ae-761347fc66e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common">
-      <UniqueIdentifier>{90342d85-67b5-4880-87c0-38632eeae51e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -13,19 +13,17 @@
 *  See the License for the specific language governing permissions and
 *  limitations under the License.
 */
-#ifndef _AML_POSITION_COMPONENT_H_
-#define _AML_POSITION_COMPONENT_H_
-#include "IComponent.h"
+#ifndef _AML_TRANSFORM_H_
+#define _AML_TRANSFORM_H_
 #include "Vector3.h"
 #include "Matrix4.h"
 #include "Types.h"
 namespace aml {
 // Forward declaration
-class IComponent;
 class Vector3;
 class Matrix4;
 // Position component declaration
-class TransformComponent : public IComponent
+class Transform
 {
 private:
 	// Position vector
@@ -37,9 +35,12 @@ private:
 	// World matrix
 	Matrix4 m_mWorld;
 public:
-	virtual HRESULT Init() final;
-	virtual HRESULT Update(const F64 iDt) final;
-	virtual HRESULT Release() final;
+	// Default constructor
+	Transform();
+	// Build world matrix
+	void BuildWorldMatrix();
+	// Access world matrix
+	const Matrix4& GetWorldMatrix() const;
 	// Position accessors
 	Vector3 GetPosition() const;
 	void SetPosition(const Vector3& vPosition);
@@ -51,16 +52,16 @@ public:
 	void SetScale(const Vector3& vScale);
 }; // PositionComponent
 // Implementation
-inline HRESULT TransformComponent::Init()
+Transform::Transform()
 {
 	// Set default params
 	m_vScale.SetCoords(1.0f, 1.0f, 1.0f);
 	m_vPosition.SetCoords(0.0f, 0.0f, 0.0f);
 	m_vRotation.SetCoords(0.0f, 0.0f, 0.0f);
 	// Build world matrix
-	return Update(0);
+	BuildWorldMatrix();
 }
-inline HRESULT TransformComponent::Update(const F64 iDt)
+inline void Transform::BuildWorldMatrix()
 {
 	Matrix4 mPosition, mRotation, mScale;
 	// Build translation matrix
@@ -71,39 +72,38 @@ inline HRESULT TransformComponent::Update(const F64 iDt)
 	mScale.FromScaling(m_vScale.x, m_vScale.y, m_vScale.z);
 	// Combine matrices
 	m_mWorld = mPosition * mRotation * mScale;
-	// Everything is OK :)
-	return S_OK;
 }
-inline HRESULT TransformComponent::Release()
+// Access world matrix
+const Matrix4& Transform::GetWorldMatrix() const
 {
-	return S_OK;
+	return m_mWorld;
 }
 // Get and Set position
-inline Vector3 TransformComponent::GetPosition() const
+inline Vector3 Transform::GetPosition() const
 {
 	return m_vPosition;
 }
-inline void TransformComponent::SetPosition(const Vector3& vPosition)
+inline void Transform::SetPosition(const Vector3& vPosition)
 {
 	m_vPosition = vPosition;
 }
 // Get and Set rotation
-inline Vector3 TransformComponent::GetRotation() const
+inline Vector3 Transform::GetRotation() const
 {
 	return m_vRotation;
 }
-inline void TransformComponent::SetRotation(const Vector3& vRotation)
+inline void Transform::SetRotation(const Vector3& vRotation)
 {
 	m_vRotation = vRotation;
 }
 // Get and Set scale
-inline Vector3 TransformComponent::GetScale() const
+inline Vector3 Transform::GetScale() const
 {
 	return m_vScale;
 }
-inline void TransformComponent::SetScale(const Vector3& vScale)
+inline void Transform::SetScale(const Vector3& vScale)
 {
 	m_vScale = vScale;
 }
 } // aml
-#endif // _AML_POSITION_COMPONENT_H_
+#endif // _AML_TRANSFORM_H_

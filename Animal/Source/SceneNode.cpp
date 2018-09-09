@@ -25,7 +25,7 @@ aml::SceneNode::SceneNode(std::wstring strName,
 	m_AlphaBlendingType = AlphaBlendingTypeOpaque;
 	m_Material.SetDiffuse(Color);
 	m_strName = strName;
-	m_Transform.Init();
+	m_Transform.BuildWorldMatrix();
 }
 // Restore state
 HRESULT aml::SceneNode::Restore(const Scene* pScene)
@@ -43,7 +43,7 @@ HRESULT aml::SceneNode::Restore(const Scene* pScene)
 HRESULT aml::SceneNode::Update(const Scene* pScene, const F64 iDt)
 {
 	// Update world matrix
-	m_Transform.Update(iDt);
+	m_Transform.BuildWorldMatrix();
 	// Iterate over all children
 	HRESULT hResult = S_OK;
 	for (const auto& it : m_Children)
