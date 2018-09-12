@@ -16,14 +16,9 @@
 #include "Inc\SceneNode.h"
 #include "Inc\Exception.h"
 // Default constructor
-aml::SceneNode::SceneNode(std::wstring strName,
-						  ERenderPass RenderPass,
-						  const FColor& Color)
+aml::SceneNode::SceneNode(std::wstring strName)
 {
 	m_pParent = nullptr;
-	m_RenderPass = RenderPass;
-	m_AlphaBlendingType = AlphaBlendingTypeOpaque;
-	m_Material.SetDiffuse(Color);
 	m_strName = strName;
 	m_Transform.BuildWorldMatrix();
 }
@@ -53,43 +48,6 @@ HRESULT aml::SceneNode::Update(const Scene* pScene, const F64 iDt)
 	}
 	return hResult;
 }
-// Render children nodes
-HRESULT aml::SceneNode::RenderChildren(const Scene* pScene)
-{
-	HRESULT hResult = S_OK;
-	// Iterate over all children
-	for (const auto& it : m_Children)
-	{
-		// Pre render setup
-		if (it->PreRender(pScene) == S_OK)
-		{
-			// Render only visible node
-			if (it->IsVisible(pScene))
-			{
-				F32 fAlpha = it->GetMaterial().GetAlpha();
-				// First render only opaque node
-				if (fAlpha == OPAQUE)
-				{
-					hResult = it->Render(pScene);
-				}
-				else if (fAlpha != TRANSPARENT)
-				{
-					// Collect almost transparent nodes
-					AlphaSceneNode* pAlphaNode = new AlphaSceneNode;
-					AML_ASSERT(pAlphaNode);
-					pAlphaNode->pNode = it;
-					pAlphaNode->mWorldMatrix = pScene->GetTopMatrix();
-					// todo: 
-				}
-			}
-			// Render children node
-			hResult = it->RenderChildren(pScene);
-		}
-		// Post render setup
-		it->PostRender(pScene);
-	}
-	return hResult;
-}
 // Add child node
 bool aml::SceneNode::AddChild(std::shared_ptr<ISceneNode> child)
 {
@@ -102,8 +60,5 @@ bool aml::SceneNode::RemoveChild(FActorId id)
 }
 // Is node visible
 bool aml::SceneNode::IsVisible(const Scene* scene) const
-{
-}
-HRESULT aml::SceneNode:: LostDevice(const Scene* pScene)
 {
 }

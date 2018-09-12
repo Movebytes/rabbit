@@ -16,13 +16,19 @@
 #ifndef _AML_ISCENE_NODE_H_
 #define _AML_ISCENE_NODE_H_
 #include <memory>
+#include <vector>
 #include "Scene.h"
 #include "Matrix4.h"
+#include "Transform.h"
 #include "Types.h"
 namespace aml {
 // Forward declarations
 class Scene;
 class Matrix4;
+class Transform;
+class ISceneNode;
+// Define scene node list
+typedef std::vector<std::shared_ptr<ISceneNode> > FSceneNodeList;
 // Declaration of SceneNode class
 class ISceneNode
 {
@@ -33,24 +39,16 @@ public:
 	virtual HRESULT Update(const Scene* pScene, const F64 iDt) = 0;
 	// Restore state
 	virtual HRESULT Restore(const Scene* pScene) = 0;
-	// Pre render node
-	virtual HRESULT PreRender(const Scene* pScene) = 0;
-	// Render node
-	virtual HRESULT Render(const Scene* pScene) = 0;
-	// Render children nodes
-	virtual HRESULT RenderChildren(const Scene* pScene) = 0;
-	// Post render node
-	virtual HRESULT PostRender(const Scene* pScene) = 0;
 	// Add child node
 	virtual bool AddChild(std::shared_ptr<ISceneNode> child) = 0;
 	// Remove child node
 	virtual bool RemoveChild(FActorId id) = 0;
-	// Handle losing device
-	virtual HRESULT LostDevice(const Scene* pScene) = 0;
+	// Access children
+	virtual const FSceneNodeList& GetChildren() const = 0;
 	// Is node visible
 	virtual bool IsVisible(const Scene* scene) const = 0;
-	// Get material
-	virtual const Material& GetMaterial() const = 0;
+	// Get transform data
+	virtual const Transform& GetTransform() const = 0;
 }; // ISceneNode
 // Default destructor
 inline ISceneNode::~ISceneNode()

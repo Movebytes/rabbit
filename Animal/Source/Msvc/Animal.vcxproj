@@ -77,6 +77,7 @@
     <ClInclude Include="..\Inc\Exception.h" />
     <ClInclude Include="..\Inc\FreeCamera.h" />
     <ClInclude Include="..\Inc\Frustum.h" />
+    <ClInclude Include="..\Inc\IRenderable.h" />
     <ClInclude Include="..\Inc\Logger.h" />
     <ClInclude Include="..\Inc\Macros.h" />
     <ClInclude Include="..\Inc\Material.h" />

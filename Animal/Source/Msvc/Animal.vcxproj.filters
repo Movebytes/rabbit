@@ -27,20 +27,11 @@
     </ClInclude>
     <ClInclude Include="..\Inc\Macros.h" />
     <ClInclude Include="..\Inc\Types.h" />
-    <ClInclude Include="..\Inc\TargetCamera.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\Inc\Logger.h">
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="..\Inc\Exception.h">
       <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Inc\Camera.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Inc\FreeCamera.h">
-      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\Inc\Constants.h">
       <Filter>Math</Filter>
@@ -72,6 +63,18 @@
     <ClInclude Include="..\Inc\Transform.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="..\Inc\Camera.h">
+      <Filter>Graphics\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inc\FreeCamera.h">
+      <Filter>Graphics\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inc\TargetCamera.h">
+      <Filter>Graphics\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inc\IRenderable.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -89,17 +92,11 @@
     <Filter Include="Graphics\Scene">
       <UniqueIdentifier>{23d212d5-08fe-41d8-a0ae-761347fc66e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Camera">
+      <UniqueIdentifier>{3e53d7a2-462c-4b94-b403-7b1532b26b80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\TargetCamera.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Camera.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeCamera.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="..\Frustum.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
@@ -108,6 +105,15 @@
     </ClCompile>
     <ClCompile Include="..\Scene.cpp">
       <Filter>Graphics\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Camera.cpp">
+      <Filter>Graphics\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeCamera.cpp">
+      <Filter>Graphics\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TargetCamera.cpp">
+      <Filter>Graphics\Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
