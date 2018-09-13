@@ -20,6 +20,7 @@
 #include "Scene.h"
 #include "Matrix4.h"
 #include "Transform.h"
+#include "IRenderable.h"
 #include "Types.h"
 namespace aml {
 // Forward declarations
@@ -27,6 +28,7 @@ class Scene;
 class Matrix4;
 class Transform;
 class ISceneNode;
+class IRenderable;
 // Define scene node list
 typedef std::vector<std::shared_ptr<ISceneNode> > FSceneNodeList;
 // Declaration of SceneNode class
@@ -43,8 +45,16 @@ public:
 	virtual bool AddChild(std::shared_ptr<ISceneNode> child) = 0;
 	// Remove child node
 	virtual bool RemoveChild(FActorId id) = 0;
-	// Access children
-	virtual const FSceneNodeList& GetChildren() const = 0;
+	// Pre render node
+	virtual HRESULT PreRender(const Scene* pScene) = 0;
+	// Render children nodes
+	virtual HRESULT RenderChildren(const Scene* pScene) = 0;
+	// Post render node
+	virtual HRESULT PostRender(const Scene* pScene) = 0;
+	// Handle losing device
+	virtual HRESULT LostDevice(const Scene* pScene) = 0;
+	// Get renderable representation of node
+	virtual const IRenderable& GetRenderable() const = 0;
 	// Is node visible
 	virtual bool IsVisible(const Scene* scene) const = 0;
 	// Get transform data

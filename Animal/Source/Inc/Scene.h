@@ -23,6 +23,7 @@ namespace aml {
 // Forward declarations
 class ISceneNode;
 class SceneNode;
+class IRenderer;
 // Declare type of scene nodes
 typedef std::map<U32, std::shared_ptr<ISceneNode> > FSceneNodeMap;
 // Scene class declaration
@@ -34,7 +35,7 @@ protected:
 	std::shared_ptr<IRenderer> m_Renderer;
 
 	ID3DXMatrixStack* m_pMatrixStack;
-	AlphaSceneNode m_AlphaNodes;
+	AlphaNodeData m_AlphaData;
 	FSceneNodeMap m_NodeMap;
 
 	LightManager* m_pLightManager;

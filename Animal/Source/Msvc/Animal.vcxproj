@@ -83,6 +83,7 @@
     <ClInclude Include="..\Inc\Material.h" />
     <ClInclude Include="..\Inc\Matrix4.h" />
     <ClInclude Include="..\Inc\Plane.h" />
+    <ClInclude Include="..\Inc\RenderableNode.h" />
     <ClInclude Include="..\Inc\Transform.h" />
     <ClInclude Include="..\Inc\Process.h" />
     <ClInclude Include="..\Inc\ProcessManager.h" />
@@ -102,6 +103,7 @@
     <ClCompile Include="..\Camera.cpp" />
     <ClCompile Include="..\FreeCamera.cpp" />
     <ClCompile Include="..\Frustum.cpp" />
+    <ClCompile Include="..\RenderableNode.cpp" />
     <ClCompile Include="..\Scene.cpp" />
     <ClCompile Include="..\SceneNode.cpp" />
     <ClCompile Include="..\TargetCamera.cpp" />

@@ -13,8 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#include "Inc\SceneNode.h"
-#include "Inc\Exception.h"
+#include "Inc/SceneNode.h"
+#include "Inc/Exception.h"
+#include "Inc/RenderableNode.h"
 // Default constructor
 aml::SceneNode::SceneNode(std::wstring strName)
 {
@@ -45,6 +46,44 @@ HRESULT aml::SceneNode::Update(const Scene* pScene, const F64 iDt)
 	{
 		// Update every child
 		hResult = it->Update(pScene, iDt);
+	}
+	return hResult;
+}
+// Render children nodes
+HRESULT aml::SceneNode::RenderChildren(const Scene* pScene)
+{
+	HRESULT hResult = S_OK;
+	// Iterate over all children
+	for (const auto& it : m_Children)
+	{
+		// Pre render setup
+		if (it->PreRender(pScene) == S_OK)
+		{
+			// Render only visible node
+			if (it->IsVisible(pScene))
+			{
+				const RenderableNode renderable = it->GetRenderable();
+				F32 fAlpha = renderable.GetMaterial().GetAlpha();
+				// First render only opaque node
+				if (fAlpha == OPAQUE)
+				{
+					hResult = renderable.Render(pScene->GetRenderer());
+				}
+				else if (fAlpha != TRANSPARENT)
+				{
+					// Collect almost transparent nodes
+					AlphaNodeData* pData = new AlphaNodeData;
+					AML_ASSERT(pData);
+					pData->pNode = it;
+					pData->mWorldMatrix = pScene->GetTopMatrix();
+					// todo: 
+				}
+			}
+			// Render children node
+			hResult = it->RenderChildren(pScene);
+		}
+		// Post render setup
+		it->PostRender(pScene);
 	}
 	return hResult;
 }

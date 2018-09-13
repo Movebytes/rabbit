@@ -14,41 +14,4 @@
 *  limitations under the License.
 */
 #include "Inc/RenderableNode.h"
-// Render children nodes
-HRESULT aml::RenderableNode::RenderChildren(const Scene* pScene)
-{
-	HRESULT hResult = S_OK;
-	auto children = m_Node->GetChildren();
-	// Iterate over all children
-	for (const auto& it : m_Children)
-	{
-		// Pre render setup
-		if (it->PreRender(pScene) == S_OK)
-		{
-			// Render only visible node
-			if (it->IsVisible(pScene))
-			{
-				F32 fAlpha = it->GetMaterial().GetAlpha();
-				// First render only opaque node
-				if (fAlpha == OPAQUE)
-				{
-					hResult = it->Render(pScene);
-				}
-				else if (fAlpha != TRANSPARENT)
-				{
-					// Collect almost transparent nodes
-					AlphaSceneNode* pAlphaNode = new AlphaSceneNode;
-					AML_ASSERT(pAlphaNode);
-					pAlphaNode->pNode = it;
-					pAlphaNode->mWorldMatrix = pScene->GetTopMatrix();
-					// todo: 
-				}
-			}
-			// Render children node
-			hResult = it->RenderChildren(pScene);
-		}
-		// Post render setup
-		it->PostRender(pScene);
-	}
-	return hResult;
-}
+#include "Inc/Exception.h"

@@ -26,6 +26,7 @@
 namespace aml {
 // Forward declarations
 class IRenderable;
+class IRenderer;
 class Scene;
 class Material;
 class Matrix4;
@@ -79,36 +80,16 @@ public:
 	RenderableNode(std::shared_ptr<ISceneNode> node, 
 				   ERenderPass RenderPass,
 				   const FColor& Color);
-	// Pre render node
-	virtual HRESULT PreRender(const Scene* pScene) override;
-	// Render children nodes
-	virtual HRESULT RenderChildren(const Scene* pScene) override;
-	// Post render node
-	virtual HRESULT PostRender(const Scene* pScene) override;
-	// Handle losing device
-	virtual HRESULT LostDevice(const Scene* pScene) override;
 	// Set material
 	void SetMaterial(const Material& material);
 	// Access material data
 	virtual const Material& GetMaterial() const override;
 protected:
-	virtual HRESULT Render(const Scene* pScene, std::shared_ptr<ISceneNode> node) override;
+	virtual HRESULT Render(const IRenderer* pRenderer, std::shared_ptr<ISceneNode> node) override;
 }; // RenderableNode
-// Pre render node
-inline HRESULT RenderableNode::PreRender(const Scene* pScene)
-{
-	pScene->PushMatrix(m_Node->GetTransform().GetWorldMatrix());
-	return S_OK;
-}
 // Render node
-inline HRESULT RenderableNode::Render(const Scene* pScene, std::shared_ptr<ISceneNode> node)
+inline HRESULT RenderableNode::Render(const IRenderer* pRenderer, std::shared_ptr<ISceneNode> node)
 {
-	return S_OK;
-}
-// Post render node
-inline HRESULT RenderableNode::PostRender(const Scene* pScene)
-{
-	pScene->PopMatrix();
 	return S_OK;
 }
 // Set material

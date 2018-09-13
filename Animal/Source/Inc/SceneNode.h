@@ -23,6 +23,8 @@
 #include "Matrix4.h"
 #include "Transform.h"
 #include "ISceneNode.h"
+#include "IRenderable.h"
+#include "RenderableNode.h"
 #include "Scene.h"
 #include "Types.h"
 namespace aml {
@@ -31,6 +33,7 @@ class Vector3;
 class Matrix4;
 class Transform;
 class ISceneNode;
+class IRenderable;
 class Scene;
 // Declaration of SceneNode
 class SceneNode : public ISceneNode
@@ -44,6 +47,8 @@ protected:
 	SceneNode* m_pParent;
 	// World transform
 	Transform m_Transform;
+	// Renderable
+	RenderableNode m_Renderable;
 public:
 	// Default constructor
 	SceneNode(std::wstring strName);
@@ -57,21 +62,42 @@ public:
 	virtual bool AddChild(std::shared_ptr<ISceneNode> child) override;
 	// Remove child node
 	virtual bool RemoveChild(FActorId id) override;
-	// Access children
-	virtual const FSceneNodeList& GetChildren() const override;
+	// Pre render node
+	virtual HRESULT PreRender(const Scene* pScene) override;
+	// Render children nodes
+	virtual HRESULT RenderChildren(const Scene* pScene) override;
+	// Post render node
+	virtual HRESULT PostRender(const Scene* pScene) override;
+	// Handle losing device
+	virtual HRESULT LostDevice(const Scene* pScene) override;
 	// Is node visible
 	virtual bool IsVisible(const Scene* scene) const override;
+	// Get renderable representation of node
+	virtual const IRenderable& GetRenderable() const = 0;
 	// Get transform data
 	virtual const Transform& GetTransform() const override;
 }; // SceneNode
 // Get transform component
-const Transform& SceneNode::GetTransform() const
+inline const Transform& SceneNode::GetTransform() const
 {
 	return m_Transform;
 } // GetTransform
-const FSceneNodeList& SceneNode::GetChildren() const
+  // Pre render node
+inline HRESULT SceneNode::PreRender(const Scene* pScene)
 {
-
+	pScene->PushMatrix(m_Transform.GetWorldMatrix());
+	return S_OK;
 }
+// Post render node
+inline HRESULT SceneNode::PostRender(const Scene* pScene)
+{
+	pScene->PopMatrix();
+	return S_OK;
+}
+// Get renderable representation of node
+inline const IRenderable& SceneNode::GetRenderable() const
+{
+	return m_Renderable;
+} // GetRenderable
 } // aml
 #endif // _AML_SCENE_NODE_H_
