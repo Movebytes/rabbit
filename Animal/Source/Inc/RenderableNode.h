@@ -48,23 +48,6 @@ enum EAlphaBlendingType
 	AlphaBlendingTypeMaterial,
 	AlphaBlendingTypeVertex
 };
-// Declaration of transparent node struct
-struct AlphaNodeData
-{
-	// Pointer for a node
-	std::shared_ptr<ISceneNode> pNode;
-	// Depth position
-	F32 fDepth;
-	// World matrix
-	Matrix4 mWorldMatrix;
-	// For sorting in depth
-	bool const operator<(const AlphaNodeData& Node)
-	{
-		return fDepth < Node.fDepth;
-	}
-};
-// Define transparent nodes list
-typedef std::list<AlphaNodeData*> FAlphaNodeList;
 // Declaration of renderable representation of node
 class RenderableNode : public IRenderable
 {

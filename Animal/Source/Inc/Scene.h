@@ -26,19 +26,36 @@ class SceneNode;
 class IRenderer;
 // Declare type of scene nodes
 typedef std::map<U32, std::shared_ptr<ISceneNode> > FSceneNodeMap;
+// Declaration of transparent node struct
+struct AlphaNodeData
+{
+	// Pointer for a node
+	std::shared_ptr<ISceneNode> pNode;
+	// Depth position
+	F32 fDepth;
+	// World matrix
+	Matrix4 mWorldMatrix;
+	// For sorting in depth
+	bool const operator<(const AlphaNodeData& Node)
+	{
+		return fDepth < Node.fDepth;
+	}
+};
+// Define transparent nodes list
+typedef std::list<AlphaNodeData*> FAlphaNodeList;
 // Scene class declaration
 class Scene
 {
 protected:
 	std::shared_ptr<SceneNode> m_Root;
-	std::shared_ptr<CameraNode> m_Camera;
+	// TODO: std::shared_ptr<CameraNode> m_Camera;
 	std::shared_ptr<IRenderer> m_Renderer;
 
 	ID3DXMatrixStack* m_pMatrixStack;
-	AlphaNodeData m_AlphaData;
+	FAlphaNodeList m_AlphaNodeList;
 	FSceneNodeMap m_NodeMap;
 
-	LightManager* m_pLightManager;
+	// TODO: LightManager* m_pLightManager;
 	void RenderAlphaNodes();
 public:
 	// Default constructor

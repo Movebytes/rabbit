@@ -72,10 +72,10 @@
     <ClInclude Include="..\Inc\TargetCamera.h">
       <Filter>Graphics\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\Inc\IRenderable.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\Inc\RenderableNode.h">
+      <Filter>Graphics\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inc\IRenderable.h">
       <Filter>Graphics\Scene</Filter>
     </ClInclude>
   </ItemGroup>

@@ -62,12 +62,12 @@ HRESULT aml::SceneNode::RenderChildren(const Scene* pScene)
 			// Render only visible node
 			if (it->IsVisible(pScene))
 			{
-				const RenderableNode renderable = it->GetRenderable();
-				F32 fAlpha = renderable.GetMaterial().GetAlpha();
+				const RenderableNode& renderableNode = (RenderableNode&)it->GetRenderable();
+				F32 fAlpha = renderableNode.GetMaterial().GetAlpha();
 				// First render only opaque node
 				if (fAlpha == OPAQUE)
 				{
-					hResult = renderable.Render(pScene->GetRenderer());
+					hResult = renderableNode.Render(pScene->GetRenderer());
 				}
 				else if (fAlpha != TRANSPARENT)
 				{

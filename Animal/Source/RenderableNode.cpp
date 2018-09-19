@@ -14,4 +14,13 @@
 *  limitations under the License.
 */
 #include "Inc/RenderableNode.h"
-#include "Inc/Exception.h"
+// Default constructor
+aml::RenderableNode::RenderableNode(std::shared_ptr<ISceneNode> Node,
+									ERenderPass RenderPass,
+									const FColor& Color)
+	: IRenderable(Node)
+{
+	m_RenderPass = RenderPass;
+	m_Material.SetDiffuse(Color);
+	m_AlphaBlendingType = AlphaBlendingTypeOpaque;
+}
