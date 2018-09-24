@@ -17,7 +17,7 @@
 #include "Inc/Exception.h"
 #include "Inc/RenderableNode.h"
 // Default constructor
-aml::SceneNode::SceneNode(std::wstring strName)
+aml::SceneNode::SceneNode(wstring strName)
 {
 	m_pParent = nullptr;
 	m_strName = strName;
@@ -62,12 +62,12 @@ HRESULT aml::SceneNode::RenderChildren(const Scene* pScene)
 			// Render only visible node
 			if (it->IsVisible(pScene))
 			{
-				const RenderableNode& renderableNode = (RenderableNode&)it->GetRenderable();
-				F32 fAlpha = renderableNode.GetMaterial().GetAlpha();
+				const RenderableNode& renderable = (RenderableNode&)it->GetRenderable();
+				F32 fAlpha = renderable.GetMaterial().GetAlpha();
 				// First render only opaque node
 				if (fAlpha == OPAQUE)
 				{
-					hResult = renderableNode.Render(pScene->GetRenderer());
+					hResult = renderable.Render(pScene->GetRenderer());
 				}
 				else if (fAlpha != TRANSPARENT)
 				{

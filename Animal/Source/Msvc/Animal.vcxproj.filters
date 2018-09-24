@@ -78,6 +78,7 @@
     <ClInclude Include="..\Inc\IRenderable.h">
       <Filter>Graphics\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Inc\AnimalStd.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -121,5 +122,6 @@
     <ClCompile Include="..\RenderableNode.cpp">
       <Filter>Graphics\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\AnimalStd.cpp" />
   </ItemGroup>
 </Project>

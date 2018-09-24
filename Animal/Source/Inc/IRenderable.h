@@ -15,7 +15,6 @@
 */
 #ifndef _AML_IRENDERABLE_H_
 #define _AML_IRENDERABLE_H_
-#include <memory>
 #include "ISceneNode.h"
 #include "Material.h"
 #include "Types.h"

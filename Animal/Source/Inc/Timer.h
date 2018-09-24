@@ -15,7 +15,6 @@
  */
 #ifndef _AML_TIMER_H_
 #define _AML_TIMER_H_
-#include <windows.h>
 #include "Types.h"
 namespace aml {
 // Timer declaration

@@ -15,8 +15,6 @@
  */
 #ifndef _AML_ISCENE_NODE_H_
 #define _AML_ISCENE_NODE_H_
-#include <memory>
-#include <vector>
 #include "Scene.h"
 #include "Matrix4.h"
 #include "Transform.h"

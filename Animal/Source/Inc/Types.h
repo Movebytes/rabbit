@@ -15,7 +15,6 @@
  */
 #ifndef _AML_TYPES_H_
 #define _AML_TYPES_H_
-#include <d3dx9math.h>
 
 #ifndef _AML_SIGNED_LONG_
 #define _AML_SIGNED_LONG_

@@ -16,7 +16,6 @@
 #ifndef _AML_EXCEPTION_H_
 #define _AML_EXCEPTION_H_
 #include <exception>
-#include <string>
 #include "Macros.h"
 #include "Logger.h"
 #include "Types.h"
@@ -27,8 +26,8 @@ class Exception
 private:
     const wchar_t* m_wszFileName;
     S32 m_iLineNum;
-    std::wstring m_strMessage;
-    std::wstring m_strReport;
+    wstring m_strMessage;
+    wstring m_strReport;
 public:
     // Formating helper class
     class TStreamFormatter
@@ -36,7 +35,7 @@ public:
     private:
         std::wostringstream m_ossStream;
     public:
-        operator std::wstring() const
+        operator wstring() const
         {
             return m_ossStream.str();
         }
@@ -48,7 +47,7 @@ public:
         }
     }; // TStreamFormatter
     // Default constructor
-    Exception(const wchar_t* wszFileName, S32 iLineNum, const std::wstring strMessage);
+    Exception(const wchar_t* wszFileName, S32 iLineNum, const wstring strMessage);
     // Default destructor
     ~Exception() throw();
     // Return exception report message
@@ -61,7 +60,7 @@ public:
     const wchar_t* GetMessage() const throw();
 }; // Exception
 // Default constructor
-inline Exception::Exception(const wchar_t* wszFileName, S32 iLineNum, const std::wstring strMessage)
+inline Exception::Exception(const wchar_t* wszFileName, S32 iLineNum, const wstring strMessage)
     : m_wszFileName(wszFileName)
     , m_iLineNum(iLineNum)
     , m_strMessage(strMessage)

@@ -15,9 +15,6 @@
 */
 #ifndef _AML_RENDERABLE_NODE_H_
 #define _AML_RENDERABLE_NODE_H_
-#include <memory>
-#include <list>
-#include <vector>
 #include "IRenderable.h"
 #include "Material.h"
 #include "Scene.h"

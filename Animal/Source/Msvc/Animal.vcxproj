@@ -43,7 +43,7 @@
     <OutDir>$(SolutionDir)..\Lib\</OutDir>
     <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
-    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\ThirdParty\DXUT11\Optional;$(ProjectDir)..\ThirdParty\DXUT11\Core;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -71,6 +71,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Inc\AnimalStd.h" />
     <ClInclude Include="..\Inc\Camera.h" />
     <ClInclude Include="..\Inc\ColorUtil.h" />
     <ClInclude Include="..\Inc\Constants.h" />
@@ -100,6 +101,7 @@
     <ClInclude Include="..\Inc\Vector4.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\AnimalStd.cpp" />
     <ClCompile Include="..\Camera.cpp" />
     <ClCompile Include="..\FreeCamera.cpp" />
     <ClCompile Include="..\Frustum.cpp" />

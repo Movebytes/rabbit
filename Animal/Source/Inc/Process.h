@@ -15,7 +15,6 @@
  */
 #ifndef _AML_PROCESS_H_
 #define _AML_PROCESS_H_
-#include <memory>
 #include "Types.h"
 #include "ProcessManager.h"
 namespace aml {

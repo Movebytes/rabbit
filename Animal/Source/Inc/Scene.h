@@ -15,17 +15,19 @@
  */
 #ifndef _AML_SCENE_H_
 #define _AML_SCENE_H_
-#include <map>
 #include "ISceneNode.h"
 #include "SceneNode.h"
+#include "Matrix4.h"
 #include "Types.h"
 namespace aml {
 // Forward declarations
 class ISceneNode;
 class SceneNode;
 class IRenderer;
+class CameraNode;
+class Matrix4;
 // Declare type of scene nodes
-typedef std::map<U32, std::shared_ptr<ISceneNode> > FSceneNodeMap;
+typedef std::map<FActorId, std::shared_ptr<ISceneNode> > FActorNodeMap;
 // Declaration of transparent node struct
 struct AlphaNodeData
 {
@@ -48,12 +50,12 @@ class Scene
 {
 protected:
 	std::shared_ptr<SceneNode> m_Root;
-	// TODO: std::shared_ptr<CameraNode> m_Camera;
+	std::shared_ptr<CameraNode> m_Camera;
 	std::shared_ptr<IRenderer> m_Renderer;
 
 	ID3DXMatrixStack* m_pMatrixStack;
 	FAlphaNodeList m_AlphaNodeList;
-	FSceneNodeMap m_NodeMap;
+	FActorNodeMap m_ActorNodeMap;
 
 	// TODO: LightManager* m_pLightManager;
 	void RenderAlphaNodes();
@@ -70,6 +72,9 @@ public:
 	HRESULT LostDevice();
 	// Update scene state
 	HRESULT Update(const U64 iDt);
+	// Camera acessors
+	void SetCamera(std::shared_ptr<CameraNode> Camera);
+	const std::shared_ptr<CameraNode> GetCamera() const;
 
 }; // Scene
 } // aml

@@ -16,7 +16,6 @@
 #ifndef _AML_LOGGER_H_
 #define _AML_LOGGER_H_
 #include <mutex>
-#include <string>
 #include <cstring>
 #include <sstream>
 #include <time.h>
@@ -47,7 +46,7 @@ private:
     {}
     // Copy and assign logger data
     TLog& operator=(const TLog<T>& log);
-    static std::wstring ToString(ELogLevel logLevel);
+    static wstring ToString(ELogLevel logLevel);
 public:
     // Default constructor
     TLog()
@@ -60,9 +59,9 @@ public:
 }; // Log
 // Return log level in string representation
 template <class T>
-std::wstring TLog<T>::ToString(ELogLevel logLevel)
+wstring TLog<T>::ToString(ELogLevel logLevel)
 {
-    std::wstring strLogLevel;
+    wstring strLogLevel;
     switch (logLevel)
     {
     case LogLevelInfo:
@@ -88,7 +87,7 @@ std::wostringstream& TLog<T>::GetStream(ELogLevel logLevel)
 {
     time_t t = time(0);   // get time now
     const S32 BUFFER_SIZE = 256;
-    std::wstring strBuffer(BUFFER_SIZE, 0);
+    wstring strBuffer(BUFFER_SIZE, 0);
 	wcsftime(&strBuffer.front(), BUFFER_SIZE, "%T", localtime(&t));
     m_wssMessages << AML_TEXT("- ") << strBuffer << AML_TEXT(" ") << ToString(logLevel) << AML_TEXT(": ");
     return m_wssMessages;
@@ -117,7 +116,7 @@ TLog<T>::~Log()
 class LogToFile
 {
 public:
-    static void Output(const std::wstring& strMessage);
+    static void Output(const wstring& strMessage);
     static void SetStream(FILE* pFile);
     static FILE*& GetStream();
 }; // LogToFile
@@ -127,7 +126,7 @@ inline FILE*& LogToFile::GetStream()
     static FILE* pStream = stderr;
     return pStream;
 } // getStream
-inline void LogToFile::Output(const std::wstring& strMessage)
+inline void LogToFile::Output(const wstring& strMessage)
 {
     std::lock_guard<std::mutex> lock(mutex);
     FILE* pStream = LogToFile::GetStream();

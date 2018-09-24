@@ -15,10 +15,6 @@
  */
 #ifndef _AML_SCENE_NODE_H_
 #define _AML_SCENE_NODE_H_
-#include <vector>
-#include <list>
-#include <memory>
-#include <string>
 #include "Vector3.h"
 #include "Matrix4.h"
 #include "Transform.h"
@@ -40,7 +36,7 @@ class SceneNode : public ISceneNode
 {
 protected:
 	// Entity name
-    std::wstring m_strName;
+    wstring m_strName;
 	// Child nodes
 	FSceneNodeList m_Children;
 	// Parent node
@@ -51,7 +47,7 @@ protected:
 	RenderableNode m_Renderable;
 public:
 	// Default constructor
-	SceneNode(std::wstring strName);
+	SceneNode(wstring strName);
 	// Default destructor
 	virtual ~SceneNode() override;
 	// Restore state

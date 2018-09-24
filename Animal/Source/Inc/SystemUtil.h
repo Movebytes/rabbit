@@ -15,14 +15,12 @@
  */
 #ifndef _AML_SYSTEM_UTIL_H_
 #define _AML_SYSTEM_UTIL_H_
-#include <string>
-#include <Windows.h>
 #include "Types.h"
 namespace aml {
 // Return application path
-inline std::wstring GetAppPath()
+inline wstring GetAppPath()
 {
-    static std::wstring strAppPath = L"";
+    static wstring strAppPath = L"";
 	if (strAppPath.empty())
     {
 		// Get full path to app
@@ -30,7 +28,7 @@ inline std::wstring GetAppPath()
 		GetModuleFileName(NULL, &strAppPath.front(), MAX_PATH);
 		// Get path without app name
 		S32 iSlashPos = strAppPath.rfind(L"\\");
-		if (iSlashPos != std::wstring::npos)
+		if (iSlashPos != wstring::npos)
 		{
 			strAppPath.resize(iSlashPos - 1);
 		}
@@ -38,22 +36,22 @@ inline std::wstring GetAppPath()
 	return strAppPath;
 } // GetAppPath()
 // Get file extension
-inline std::wstring GetFileExt(const std::wstring& strFileName)
+inline wstring GetFileExt(const wstring& strFileName)
 {
 	S32 iDotPos = strFileName.rfind(L".");
-    std::wstring strExt;
-    if (iDotPos != std::wstring::npos)
+    wstring strExt;
+    if (iDotPos != wstring::npos)
     {
         strExt = strFileName.substr(iDotPos + 1);
     }
 	return strExt;
 } // GetFileExt
 // Get file name
-inline std::wstring GetFileName(const std::wstring& strFileName)
+inline wstring GetFileName(const wstring& strFileName)
 {
     S32 iDotPos = strFileName.rfind(L".");
-    std::wstring strName = strFileName;
-    if (iDotPos != std::wstring::npos)
+    wstring strName = strFileName;
+    if (iDotPos != wstring::npos)
     {
         strName = strFileName.substr(0, iDotPos - 1);
     }

@@ -15,7 +15,6 @@
  */
 #ifndef _AML_MACROS_H_
 #define _AML_MACROS_H_
-#include <stdlib.h>
 #include "Constants.h"
 // Max and min
 #define AML_MIN(a, b) (a < b ? a : b)
