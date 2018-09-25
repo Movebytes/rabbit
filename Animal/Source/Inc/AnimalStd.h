@@ -36,6 +36,14 @@
 #include <list>
 #include <map>
 
+// Third party headers
+
+// Include DirectX's headers
+#include <DXUT.h>
+#include <d3dx9tex.h>
+#include <SDKmisc.h>
+
+// Animal's headers
 
 
 #endif // _AML_ANIMAL_STD_
