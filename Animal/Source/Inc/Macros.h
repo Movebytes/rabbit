@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,9 +14,6 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_MACROS_H_
-#define _AML_MACROS_H_
-#include "Constants.h"
 // Max and min
 #define AML_MIN(a, b) (a < b ? a : b)
 #define AML_MAX(a, b) (a > b ? b : a)
@@ -33,4 +31,3 @@
 // Convert to wide string
 #define AML_TEXT(text) L ## text
 #define AML_RUNTIME_TEXT(text) AML_TEXT(text)
-#endif // _AML_MACROS_H_

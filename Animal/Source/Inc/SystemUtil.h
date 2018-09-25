@@ -1,3 +1,4 @@
+#pragma once
 /*
  * Copyright 2018 Movebytes Group.
  *
@@ -13,14 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef _AML_SYSTEM_UTIL_H_
-#define _AML_SYSTEM_UTIL_H_
-#include "Types.h"
 namespace aml {
 // Return application path
-inline wstring GetAppPath()
+inline FString GetAppPath()
 {
-    static wstring strAppPath = L"";
+    static FString strAppPath = L"";
 	if (strAppPath.empty())
     {
 		// Get full path to app
@@ -28,7 +26,7 @@ inline wstring GetAppPath()
 		GetModuleFileName(NULL, &strAppPath.front(), MAX_PATH);
 		// Get path without app name
 		S32 iSlashPos = strAppPath.rfind(L"\\");
-		if (iSlashPos != wstring::npos)
+		if (iSlashPos != FString::npos)
 		{
 			strAppPath.resize(iSlashPos - 1);
 		}
@@ -36,26 +34,25 @@ inline wstring GetAppPath()
 	return strAppPath;
 } // GetAppPath()
 // Get file extension
-inline wstring GetFileExt(const wstring& strFileName)
+inline FString GetFileExt(const FString& strFileName)
 {
 	S32 iDotPos = strFileName.rfind(L".");
-    wstring strExt;
-    if (iDotPos != wstring::npos)
+    FString strExt;
+    if (iDotPos != FString::npos)
     {
         strExt = strFileName.substr(iDotPos + 1);
     }
 	return strExt;
 } // GetFileExt
 // Get file name
-inline wstring GetFileName(const wstring& strFileName)
+inline FString GetFileName(const FString& strFileName)
 {
     S32 iDotPos = strFileName.rfind(L".");
-    wstring strName = strFileName;
-    if (iDotPos != wstring::npos)
+    FString strName = strFileName;
+    if (iDotPos != FString::npos)
     {
         strName = strFileName.substr(0, iDotPos - 1);
     }
     return strName;
 } // GetFileName
 } // aml
-#endif // _AML_SYSTEM_UTIL_H_

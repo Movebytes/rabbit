@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,9 +14,6 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_TYPES_H_
-#define _AML_TYPES_H_
-
 #ifndef _AML_SIGNED_LONG_
 #define _AML_SIGNED_LONG_
 typedef long long S64;
@@ -76,5 +74,3 @@ typedef U32 FActorId;
 #define _AML_COLOR_
 typedef D3DXCOLOR FColor;
 #endif // _AML_COLOR_
-
-#endif //_AML_TYPES_H_

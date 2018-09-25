@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,12 +14,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_PLANE_H_
-#define _AML_PLANE_H_
 #include <d3dx9math.h>
 #include "Vector3.h"
 #include "Constants.h"
-#include "Types.h"
 namespace aml {
 // Forward declarations
 class Vector3;
@@ -106,4 +104,3 @@ inline EPlanePosition Plane::Classify(const Vector3& vPoint, const F32 fRadius) 
     }
 }
 } // aml
-#endif // _AML_PLANE_H_

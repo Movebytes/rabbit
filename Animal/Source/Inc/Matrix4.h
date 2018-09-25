@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,12 +14,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_MATRIX4_H_
-#define _AML_MATRIX4_H_
 #include <d3dx9math.h>
 #include "Vector3.h"
 #include "Vector4.h"
-#include "Types.h"
 namespace aml {
 // Forward declarations
 class Vector3;
@@ -160,4 +158,3 @@ inline void Matrix4::FromScaling(const F32 fScaleX, const F32 fScaleY, const F32
 	D3DXMatrixScaling(this, fScaleX, fScaleY, fScaleZ);
 }
 } // aml
-#endif // _AML_MATRIX4_H_

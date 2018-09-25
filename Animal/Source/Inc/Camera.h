@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2017 Movebytes Group
  *
@@ -13,13 +14,10 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_CAMERA_H_
-#define _AML_CAMERA_H_
 #include <d3dx9math.h>
 #include "Vector3.h"
 #include "Matrix4.h"
 #include "Frustum.h"
-#include "Types.h"
 namespace aml {
 // Forward declarations
 class Vector3;
@@ -121,4 +119,3 @@ inline const Frustum& Camera::GetViewFrustum() const
     return m_viewFrustum;
 }
 } // aml
-#endif // _AML_CAMERA_H_

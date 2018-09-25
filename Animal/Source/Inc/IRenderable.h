@@ -1,3 +1,4 @@
+#pragma once
 /**
 *  Copyright 2018 Movebytes Group
 *
@@ -13,11 +14,8 @@
 *  See the License for the specific language governing permissions and
 *  limitations under the License.
 */
-#ifndef _AML_IRENDERABLE_H_
-#define _AML_IRENDERABLE_H_
 #include "ISceneNode.h"
 #include "Material.h"
-#include "Types.h"
 namespace aml {
 // Forward declarations
 class ISceneNode;
@@ -28,10 +26,10 @@ class IRenderable
 {
 protected:
 	// Node of which is renderable representation
-	std::shared_ptr<ISceneNode> m_Node;
+	shared_ptr<ISceneNode> m_Node;
 public:
 	// Default constructor
-	explicit IRenderable(std::shared_ptr<ISceneNode> node);
+	explicit IRenderable(shared_ptr<ISceneNode> node);
 	// Default destructor
 	virtual ~IRenderable();
 	// Render node
@@ -42,15 +40,14 @@ public:
 	// Get material
 	virtual const Material& GetMaterial() const = 0;
 protected:
-	virtual HRESULT Render(const IRenderer* pScene, std::shared_ptr<ISceneNode> node) = 0;
+	virtual HRESULT Render(const IRenderer* pScene, shared_ptr<ISceneNode> node) = 0;
 }; // IRenderable
 inline IRenderable::~IRenderable()
 {
 } // ~IRenderable
 // Default constructor
-inline IRenderable::IRenderable(std::shared_ptr<ISceneNode> node)
+inline IRenderable::IRenderable(shared_ptr<ISceneNode> node)
 {
 	m_Node = node;
 } // IRenderable
 } // aml
-#endif // _AML_IRENDERABLE_H_

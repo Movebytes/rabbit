@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,12 +14,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_FRUSTUM_H_
-#define _AML_FRUSTUM_H_
 #include "Vector3.h"
 #include "Constants.h"
 #include "Plane.h"
-#include "Types.h"
 namespace aml {
 // Forward declarations
 class Plane;
@@ -131,4 +129,3 @@ inline F32 Frustum::GetFarZ() const
 	return m_fFarZ;
 }
 } // aml
-#endif // _AML_FRUSTUM_H_

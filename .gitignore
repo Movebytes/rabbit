@@ -27,7 +27,7 @@ ipch
 
 # Folders
 
-Temp/*
+Temp
 .vs
 
 # Another files

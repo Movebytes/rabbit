@@ -1,3 +1,4 @@
+#pragma once
 /**
 *  Copyright 2018 Movebytes Group
 *
@@ -13,11 +14,8 @@
 *  See the License for the specific language governing permissions and
 *  limitations under the License.
 */
-#ifndef _AML_TRANSFORM_H_
-#define _AML_TRANSFORM_H_
 #include "Vector3.h"
 #include "Matrix4.h"
-#include "Types.h"
 namespace aml {
 // Forward declaration
 class Vector3;
@@ -106,4 +104,3 @@ inline void Transform::SetScale(const Vector3& vScale)
 	m_vScale = vScale;
 }
 } // aml
-#endif // _AML_TRANSFORM_H_

@@ -15,7 +15,7 @@
 */
 #include "Inc/RenderableNode.h"
 // Default constructor
-aml::RenderableNode::RenderableNode(std::shared_ptr<ISceneNode> Node,
+aml::RenderableNode::RenderableNode(shared_ptr<ISceneNode> Node,
 									ERenderPass RenderPass,
 									const FColor& Color)
 	: IRenderable(Node)

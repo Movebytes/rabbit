@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,10 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_VECTOR2_H_
-#define _AML_VECTOR2_H_
 #include <d3dx9math.h>
-#include "Types.h"
 #include "Matrix4.h"
 #include "Vector3.h"
 namespace aml {
@@ -158,4 +156,3 @@ inline bool Vector2::operator>(const Vector2 & Vector) const
 	return (x > Vector.x && y > Vector.y);
 }
 } // aml
-#endif // _AML_VECTOR2_H_

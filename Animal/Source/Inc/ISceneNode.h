@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,13 +14,10 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_ISCENE_NODE_H_
-#define _AML_ISCENE_NODE_H_
 #include "Scene.h"
 #include "Matrix4.h"
 #include "Transform.h"
 #include "IRenderable.h"
-#include "Types.h"
 namespace aml {
 // Forward declarations
 class Scene;
@@ -28,7 +26,7 @@ class Transform;
 class ISceneNode;
 class IRenderable;
 // Define scene node list
-typedef std::vector<std::shared_ptr<ISceneNode> > FSceneNodeList;
+typedef vector<shared_ptr<ISceneNode> > FSceneNodeList;
 // Declaration of SceneNode class
 class ISceneNode
 {
@@ -40,7 +38,7 @@ public:
 	// Restore state
 	virtual HRESULT Restore(const Scene* pScene) = 0;
 	// Add child node
-	virtual bool AddChild(std::shared_ptr<ISceneNode> child) = 0;
+	virtual bool AddChild(shared_ptr<ISceneNode> child) = 0;
 	// Remove child node
 	virtual bool RemoveChild(FActorId id) = 0;
 	// Pre render node
@@ -62,4 +60,3 @@ public:
 inline ISceneNode::~ISceneNode()
 {}
 } // aml
-#endif // _AML_ISCENE_NODE_H_

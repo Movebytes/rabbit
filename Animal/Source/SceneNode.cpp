@@ -17,7 +17,7 @@
 #include "Inc/Exception.h"
 #include "Inc/RenderableNode.h"
 // Default constructor
-aml::SceneNode::SceneNode(wstring strName)
+aml::SceneNode::SceneNode(FString strName)
 {
 	m_pParent = nullptr;
 	m_strName = strName;
@@ -88,7 +88,7 @@ HRESULT aml::SceneNode::RenderChildren(const Scene* pScene)
 	return hResult;
 }
 // Add child node
-bool aml::SceneNode::AddChild(std::shared_ptr<ISceneNode> child)
+bool aml::SceneNode::AddChild(shared_ptr<ISceneNode> child)
 {
 	m_Children.push_back(child);
 	// Todo: calc bounding object

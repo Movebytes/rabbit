@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,9 +14,6 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_MATERIAL_H_
-#define _AML_MATERIAL_H_
-#include "Types.h"
 namespace aml {
 // Transparency constants
 #define OPAQUE (1.0f)
@@ -117,4 +115,3 @@ inline bool Material::HasAlpha() const
 	return GetAlpha() != OPAQUE;
 }
 } // aml
-#endif // _AML_MATERIAL_H_

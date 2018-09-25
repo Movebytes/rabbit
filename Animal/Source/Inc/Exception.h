@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2017 Movebytes Group
  *
@@ -13,12 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_EXCEPTION_H_
-#define _AML_EXCEPTION_H_
 #include <exception>
-#include "Macros.h"
-#include "Logger.h"
-#include "Types.h"
 namespace aml {
 // Custom exception class helper
 class Exception
@@ -26,8 +22,8 @@ class Exception
 private:
     const wchar_t* m_wszFileName;
     S32 m_iLineNum;
-    wstring m_strMessage;
-    wstring m_strReport;
+    FString m_strMessage;
+    FString m_strReport;
 public:
     // Formating helper class
     class TStreamFormatter
@@ -35,7 +31,7 @@ public:
     private:
         std::wostringstream m_ossStream;
     public:
-        operator wstring() const
+        operator FString() const
         {
             return m_ossStream.str();
         }
@@ -47,7 +43,7 @@ public:
         }
     }; // TStreamFormatter
     // Default constructor
-    Exception(const wchar_t* wszFileName, S32 iLineNum, const wstring strMessage);
+    Exception(const wchar_t* wszFileName, S32 iLineNum, const FString strMessage);
     // Default destructor
     ~Exception() throw();
     // Return exception report message
@@ -60,7 +56,7 @@ public:
     const wchar_t* GetMessage() const throw();
 }; // Exception
 // Default constructor
-inline Exception::Exception(const wchar_t* wszFileName, S32 iLineNum, const wstring strMessage)
+inline Exception::Exception(const wchar_t* wszFileName, S32 iLineNum, const FString strMessage)
     : m_wszFileName(wszFileName)
     , m_iLineNum(iLineNum)
     , m_strMessage(strMessage)
@@ -105,4 +101,3 @@ if (!condition) \
 { \
     AML_EXCEPTION(AML_TEXT("Assertion failure!")) \
 }
-#endif // _AML_EXCEPTION_H_

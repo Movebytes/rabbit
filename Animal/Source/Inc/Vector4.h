@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,11 +14,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_VECTOR4_H_
-#define _AML_VECTOR4_H_
 #include <d3dx9math.h>
 #include "Matrix4.h"
-#include "Types.h"
 namespace aml {
 // Forward declarations
 class Matrix4;
@@ -166,4 +164,3 @@ inline bool Vector4::operator>(const Vector4 & Vector) const
 	return (x > Vector.x && y > Vector.y && z > Vector.z && w > Vector.w);
 }
 } // aml
-#endif // _AML_VECTOR4_H_

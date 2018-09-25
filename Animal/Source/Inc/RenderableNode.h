@@ -1,3 +1,4 @@
+#pragma once
 /**
 *  Copyright 2018 Movebytes Group
 *
@@ -13,13 +14,10 @@
 *  See the License for the specific language governing permissions and
 *  limitations under the License.
 */
-#ifndef _AML_RENDERABLE_NODE_H_
-#define _AML_RENDERABLE_NODE_H_
 #include "IRenderable.h"
 #include "Material.h"
 #include "Scene.h"
 #include "Matrix4.h"
-#include "Types.h"
 namespace aml {
 // Forward declarations
 class IRenderable;
@@ -57,7 +55,7 @@ private:
 	EAlphaBlendingType m_AlphaBlendingType;
 public:
 	// Default constructor
-	RenderableNode(std::shared_ptr<ISceneNode> node, 
+	RenderableNode(shared_ptr<ISceneNode> node, 
 				   ERenderPass RenderPass,
 				   const FColor& Color);
 	// Set material
@@ -65,10 +63,10 @@ public:
 	// Access material data
 	virtual const Material& GetMaterial() const override;
 protected:
-	virtual HRESULT Render(const IRenderer* pRenderer, std::shared_ptr<ISceneNode> node) override;
+	virtual HRESULT Render(const IRenderer* pRenderer, shared_ptr<ISceneNode> node) override;
 }; // RenderableNode
 // Render node
-inline HRESULT RenderableNode::Render(const IRenderer* pRenderer, std::shared_ptr<ISceneNode> node)
+inline HRESULT RenderableNode::Render(const IRenderer* pRenderer, shared_ptr<ISceneNode> node)
 {
 	return S_OK;
 }
@@ -82,4 +80,3 @@ inline const Material& RenderableNode::GetMaterial() const
 	return m_Material;
 }
 } // aml
-#endif // _AML_RENDERABLE_NODE_H_

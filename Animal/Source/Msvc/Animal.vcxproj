@@ -40,8 +40,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)..\Lib\</OutDir>
-    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)..\..\Lib\</OutDir>
+    <IntDir>$(ProjectDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
     <IncludePath>$(ProjectDir)..\ThirdParty\DXUT11\Optional;$(ProjectDir)..\ThirdParty\DXUT11\Core;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
@@ -51,8 +51,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>AnimalStd.h</PrecompiledHeaderFile>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>$(ProjectDir)..\Inc\AnimalStd.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

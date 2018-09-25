@@ -1,3 +1,4 @@
+#pragma once
 /**
 *  Copyright 2017 Movebytes Group
 *
@@ -13,9 +14,6 @@
 *  See the License for the specific language governing permissions and
 *  limitations under the License.
 */
-#ifndef _AML_COLOR_UTIL_H_
-#define _AML_COLOR_UTIL_H_
-#include "Types.h"
 namespace aml {
 // Return 32 bit RGB color value
 inline U32 RGB32(U8 red, U8 green, U8 blue)
@@ -182,4 +180,3 @@ inline U32 BGRA32(U8 blue, U8 green, U8 red, U8 alpha)
     return color;
 }
 } // aml
-#endif // _AML_COLOR_UTIL_H_

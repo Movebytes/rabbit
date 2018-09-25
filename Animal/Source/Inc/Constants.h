@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,9 +14,6 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_MATH_CONSTANST_H_
-#define _AML_MATH_CONSTANST_H_
-#include "Types.h"
 // PI
 #define PI		 ((F32)3.141592654f)
 #define PI2		 ((F32)6.283185307f)
@@ -25,4 +23,3 @@
 #define EPSILON_E4 ((F32)1E-4) // 0,0001
 #define EPSILON_E5 ((F32)1E-5) // 0,00001
 #define EPSILON_E6 ((F32)1E-6) // 0,000001
-#endif // _AML_MATH_CONSTANST_H_

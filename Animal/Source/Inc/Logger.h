@@ -1,3 +1,4 @@
+#pragma once
 /**
 *  Copyright 2017 Movebytes Group
 *
@@ -13,14 +14,10 @@
 *  See the License for the specific language governing permissions and
 *  limitations under the License.
 */
-#ifndef _AML_LOGGER_H_
-#define _AML_LOGGER_H_
 #include <mutex>
 #include <cstring>
 #include <sstream>
 #include <time.h>
-#include "Macros.h"
-#include "Types.h"
 static std::mutex mutex;
 namespace aml {
 enum ELogLevel
@@ -46,7 +43,7 @@ private:
     {}
     // Copy and assign logger data
     TLog& operator=(const TLog<T>& log);
-    static wstring ToString(ELogLevel logLevel);
+    static FString ToString(ELogLevel logLevel);
 public:
     // Default constructor
     TLog()
@@ -59,9 +56,9 @@ public:
 }; // Log
 // Return log level in string representation
 template <class T>
-wstring TLog<T>::ToString(ELogLevel logLevel)
+FString TLog<T>::ToString(ELogLevel logLevel)
 {
-    wstring strLogLevel;
+    FString strLogLevel;
     switch (logLevel)
     {
     case LogLevelInfo:
@@ -87,7 +84,7 @@ std::wostringstream& TLog<T>::GetStream(ELogLevel logLevel)
 {
     time_t t = time(0);   // get time now
     const S32 BUFFER_SIZE = 256;
-    wstring strBuffer(BUFFER_SIZE, 0);
+    FString strBuffer(BUFFER_SIZE, 0);
 	wcsftime(&strBuffer.front(), BUFFER_SIZE, "%T", localtime(&t));
     m_wssMessages << AML_TEXT("- ") << strBuffer << AML_TEXT(" ") << ToString(logLevel) << AML_TEXT(": ");
     return m_wssMessages;
@@ -116,7 +113,7 @@ TLog<T>::~Log()
 class LogToFile
 {
 public:
-    static void Output(const wstring& strMessage);
+    static void Output(const FString& strMessage);
     static void SetStream(FILE* pFile);
     static FILE*& GetStream();
 }; // LogToFile
@@ -126,7 +123,7 @@ inline FILE*& LogToFile::GetStream()
     static FILE* pStream = stderr;
     return pStream;
 } // getStream
-inline void LogToFile::Output(const wstring& strMessage)
+inline void LogToFile::Output(const FString& strMessage)
 {
     std::lock_guard<std::mutex> lock(mutex);
     FILE* pStream = LogToFile::GetStream();
@@ -158,4 +155,3 @@ typedef TLog<LogToFile> FLogger;
     else if (logLevel < FLogger::GetReportingLevel() || !LogToFile::GetStream()); \
     else FLogger().GetStream(logLevel)
 } // aml
-#endif // _AML_LOGGER_H_

@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,12 +14,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_SCENE_H_
-#define _AML_SCENE_H_
 #include "ISceneNode.h"
 #include "SceneNode.h"
 #include "Matrix4.h"
-#include "Types.h"
 namespace aml {
 // Forward declarations
 class ISceneNode;
@@ -27,12 +25,12 @@ class IRenderer;
 class CameraNode;
 class Matrix4;
 // Declare type of scene nodes
-typedef std::map<FActorId, std::shared_ptr<ISceneNode> > FActorNodeMap;
+typedef map<FActorId, shared_ptr<ISceneNode> > FActorNodeMap;
 // Declaration of transparent node struct
 struct AlphaNodeData
 {
 	// Pointer for a node
-	std::shared_ptr<ISceneNode> pNode;
+	shared_ptr<ISceneNode> pNode;
 	// Depth position
 	F32 fDepth;
 	// World matrix
@@ -44,14 +42,14 @@ struct AlphaNodeData
 	}
 };
 // Define transparent nodes list
-typedef std::list<AlphaNodeData*> FAlphaNodeList;
+typedef list<AlphaNodeData*> FAlphaNodeList;
 // Scene class declaration
 class Scene
 {
 protected:
-	std::shared_ptr<SceneNode> m_Root;
-	std::shared_ptr<CameraNode> m_Camera;
-	std::shared_ptr<IRenderer> m_Renderer;
+	shared_ptr<SceneNode> m_Root;
+	shared_ptr<CameraNode> m_Camera;
+	shared_ptr<IRenderer> m_Renderer;
 
 	ID3DXMatrixStack* m_pMatrixStack;
 	FAlphaNodeList m_AlphaNodeList;
@@ -73,9 +71,8 @@ public:
 	// Update scene state
 	HRESULT Update(const U64 iDt);
 	// Camera acessors
-	void SetCamera(std::shared_ptr<CameraNode> Camera);
-	const std::shared_ptr<CameraNode> GetCamera() const;
+	void SetCamera(shared_ptr<CameraNode> Camera);
+	const shared_ptr<CameraNode> GetCamera() const;
 
 }; // Scene
 } // aml
-#endif // _AML_SCENE_H_

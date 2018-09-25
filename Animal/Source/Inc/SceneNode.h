@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,8 +14,6 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_SCENE_NODE_H_
-#define _AML_SCENE_NODE_H_
 #include "Vector3.h"
 #include "Matrix4.h"
 #include "Transform.h"
@@ -22,7 +21,6 @@
 #include "IRenderable.h"
 #include "RenderableNode.h"
 #include "Scene.h"
-#include "Types.h"
 namespace aml {
 // Forward declarations
 class Vector3;
@@ -36,7 +34,7 @@ class SceneNode : public ISceneNode
 {
 protected:
 	// Entity name
-    wstring m_strName;
+    FString m_strName;
 	// Child nodes
 	FSceneNodeList m_Children;
 	// Parent node
@@ -47,7 +45,7 @@ protected:
 	RenderableNode m_Renderable;
 public:
 	// Default constructor
-	SceneNode(wstring strName);
+	SceneNode(FString strName);
 	// Default destructor
 	virtual ~SceneNode() override;
 	// Restore state
@@ -55,7 +53,7 @@ public:
 	// Update state
 	virtual HRESULT Update(const Scene* pScene, const F64 iDt) override;
 	// Add child node
-	virtual bool AddChild(std::shared_ptr<ISceneNode> child) override;
+	virtual bool AddChild(shared_ptr<ISceneNode> child) override;
 	// Remove child node
 	virtual bool RemoveChild(FActorId id) override;
 	// Pre render node
@@ -96,4 +94,3 @@ inline const IRenderable& SceneNode::GetRenderable() const
 	return m_Renderable;
 } // GetRenderable
 } // aml
-#endif // _AML_SCENE_NODE_H_

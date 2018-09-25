@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,11 +14,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_VECTOR3_H_
-#define _AML_VECTOR3_H_
 #include <d3dx9math.h>
 #include "Vector4.h"
-#include "Types.h"
 namespace aml {
 // Forward declarations
 class Vector4;
@@ -190,4 +188,3 @@ inline bool Vector3::operator>(const Vector3 & Vector) const
 	return (x > Vector.x && y > Vector.y && z > Vector.z);
 }
 } // aml
-#endif // _AML_VECTOR3_H_

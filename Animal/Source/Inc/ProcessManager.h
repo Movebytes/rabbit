@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,9 +14,5 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_PROCESS_MANAGER_H_
-#define _AML_PROCESS_MANAGER_H_
-#include "Macros.h"
 namespace aml {
 } // aml
-#endif // _AML_PROCESS_MANAGER_H_

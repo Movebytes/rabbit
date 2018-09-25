@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,12 +14,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_TARGET_CAMERA_H_
-#define _AML_TARGET_CAMERA_H_
 #include "Camera.h"
 #include "Vector3.h"
-#include "Macros.h"
-#include "Types.h"
 namespace aml {
 // Forward declarations
 class Camera;
@@ -64,4 +61,3 @@ inline const Vector3 TargetCamera::GetTarget() const
     return m_vTarget;
 }
 } // aml
-#endif // _AML_TARGET_CAMERA_H_

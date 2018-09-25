@@ -1,3 +1,4 @@
+#pragma once
 /**
 *  Copyright 2018 Movebytes Group
 *
@@ -13,8 +14,6 @@
 *  See the License for the specific language governing permissions and
 *  limitations under the License.
 */
-#ifndef _AML_ICOMPONENT_H_
-#define _AML_ICOMPONENT_H_
 #include "Types.h"
 namespace aml {
 // Declaration of component class
@@ -37,4 +36,3 @@ inline IComponent::~IComponent()
 	Release();
 }
 } // aml
-#endif // _AML_ICOMPONENT_H_

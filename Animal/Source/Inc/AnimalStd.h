@@ -1,3 +1,4 @@
+#pragma once
 /**
 *  Copyright 2018 Movebytes Group
 *
@@ -13,9 +14,6 @@
 *  See the License for the specific language governing permissions and
 *  limitations under the License.
 */
-#ifndef _AML_ANIMAL_STD_
-#define _AML_ANIMAL_STD_
-
 #define WIN32_LEAN_AND_MEAN
 
 // Include Windows headers
@@ -36,7 +34,19 @@
 #include <list>
 #include <map>
 
-// Third party headers
+// Using
+using std::vector;
+using std::list;
+using std::map;
+using std::shared_ptr;
+using std::weak_ptr;
+using std::static_pointer_cast;
+using std::dynamic_pointer_cast;
+
+// Typedefs
+typedef std::wstring FString;
+
+// Third party headers go here
 
 // Include DirectX's headers
 #include <DXUT.h>
@@ -44,6 +54,8 @@
 #include <SDKmisc.h>
 
 // Animal's headers
-
-
-#endif // _AML_ANIMAL_STD_
+#include "Types.h"
+#include "Constants.h"
+#include "Macros.h"
+#include "Logger.h"
+#include "Exception.h"

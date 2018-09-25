@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2018 Movebytes Group
  *
@@ -13,17 +14,14 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_PROCESS_H_
-#define _AML_PROCESS_H_
-#include "Types.h"
 #include "ProcessManager.h"
 namespace aml {
 // Forward declaration
 class Process;
 class ProcessManager;
 // Typedefs
-typedef std::shared_ptr<Process> FStrongProcessPtr;
-typedef std::weak_ptr<Process> FWeakProcessPtr;
+typedef shared_ptr<Process> FStrongProcessPtr;
+typedef weak_ptr<Process> FWeakProcessPtr;
 // Process class
 class Process
 {
@@ -92,10 +90,9 @@ protected:
 	{
 		m_state = ProcessStateRunning;
 	}
-	virtual void Update(U64 iDelta) = 0;
+	virtual void Update(const U64 iDt) = 0;
 	virtual void Success() {}
 	virtual void Fail() {}
 	virtual void Abort() {}
 }; // Process
 } // aml
-#endif // _AML_PROCESS_H_

@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Copyright 2017 Movebytes Group
  *
@@ -13,9 +14,6 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#ifndef _AML_TIMER_H_
-#define _AML_TIMER_H_
-#include "Types.h"
 namespace aml {
 // Timer declaration
 class Timer
@@ -132,4 +130,3 @@ inline bool Timer::IsPaused()
     return m_bPaused;
 }
 } // aml
-#endif // _AML_TIMER_H_

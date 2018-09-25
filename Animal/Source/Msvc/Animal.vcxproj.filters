@@ -25,7 +25,6 @@
     <ClInclude Include="..\Inc\Timer.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="..\Inc\Macros.h" />
     <ClInclude Include="..\Inc\Types.h" />
     <ClInclude Include="..\Inc\Logger.h">
       <Filter>System</Filter>
@@ -79,6 +78,9 @@
       <Filter>Graphics\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Inc\AnimalStd.h" />
+    <ClInclude Include="..\Inc\Macros.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
