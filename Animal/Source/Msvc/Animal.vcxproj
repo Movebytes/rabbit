@@ -107,10 +107,12 @@
     <ClCompile Include="..\Camera.cpp" />
     <ClCompile Include="..\FreeCamera.cpp" />
     <ClCompile Include="..\Frustum.cpp" />
+    <ClCompile Include="..\Material.cpp" />
     <ClCompile Include="..\RenderableNode.cpp" />
     <ClCompile Include="..\Scene.cpp" />
     <ClCompile Include="..\SceneNode.cpp" />
     <ClCompile Include="..\TargetCamera.cpp" />
+    <ClCompile Include="..\Transform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

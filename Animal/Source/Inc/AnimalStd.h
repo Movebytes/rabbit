@@ -18,7 +18,6 @@
 
 // Include Windows headers
 #include <windows.h>
-#include <windowsx.h>
 
 // CRT's memory leak detection
 #if defined(DEBUG) || defined(_DEBUG)

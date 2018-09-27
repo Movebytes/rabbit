@@ -125,5 +125,11 @@
       <Filter>Graphics\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\AnimalStd.cpp" />
+    <ClCompile Include="..\Material.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Transform.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
